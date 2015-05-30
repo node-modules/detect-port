@@ -14,7 +14,6 @@
 
 'use strict';
 
-var co = require('co');
 var fs = require('fs');
 var path = require('path');
 var program = require('commander');
@@ -85,13 +84,13 @@ global.__detect = global.__detect || {};
 global.__detect.options = options;
 
 var detect = require('../lib');
+var port = options.port;
 
-co(function *(port) {
-  var _port = yield detect(port);
+detect(port, function(_port) {
 
   if (port === _port) {
     console.log('port: %d was not occupied', port);
   } else {
     console.log('port: %d was occupied, try port: %d', port, _port);
   }
-})(options.port);
+});

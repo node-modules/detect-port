@@ -10,14 +10,17 @@ pull:
 	@git pull origin ${current_version}
 push:
 	@git push origin ${current_version}
-publish: build
-	@npm publish
 test: install
 	@node --harmony \
 		${npm_bin}/istanbul cover ${npm_bin}/_mocha \
 		-- \
 		--timeout 10000 \
 		--require co-mocha
+travis: install
+	@NODE_ENV=test ${npm_bin}/istanbul cover \
+		${npm_bin}/_mocha \
+		--report lcovonly \
+		-- -t 20000 test/*.test.js
 jshint:
 	@${npm_bin}/jshint .
 .PHONY: test

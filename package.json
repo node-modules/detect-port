@@ -13,7 +13,6 @@
     "url": "git://github.com/xudafeng/detect-port.git"
   },
   "dependencies": {
-    "co": "3",
     "commander": "~2.8.1"
   },
   "devDependencies": {
@@ -31,7 +30,7 @@
     "jshint"
   ],
   "engines": {
-    "node": ">= 10.0.x"
+    "node": ">= 11.14.x"
   },
   "author": "xudafeng",
   "homepage": "https://github.com/xudafeng/detect-port",
