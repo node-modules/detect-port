@@ -26,9 +26,9 @@ var options = {
 
 program
   .usage('[options] [arguments]')
-  .option('-v, --versions', 'show version and exit')
-  .option('-p, --port',     'set port for detect (default: 8080)')
-  .option('--verbose',      'show more debugging information')
+  .option('-v, --versions',     'show version and exit')
+  .option('-p, --port <d>',     'set port for detect (default: 8080)')
+  .option('--verbose',          'show more debugging information')
   .helpInformation = function() {
     return [
       '',
@@ -55,30 +55,35 @@ if (program.versions) {
   process.exit(0);
 }
 
-var arg_0 = program.args[0];
+var camelcase = function(str) {
+  return str.split('-').reduce(function(str, word){
+    return str + word[0].toUpperCase() + word.slice(1);
+  });
+};
 
-if (program.port) {
+var getConfig = function(program) {
+  var cfg = {};
 
-  if (arg_0) {
-    arg_0 = parseInt(arg_0);
+  program.options.forEach(function(item) {
+    var key = camelcase(item.name());
 
-    if (!arg_0 || typeof arg_0 !== 'number') {
-      console.log('port should be a number');
-      program.help();
+    if(key in program) {
+
+      if (typeof program[key] !== 'function') {
+        cfg[key] = program[key];
+      }
     }
-    options.port = arg_0;
-  }
-} else {
+  });
+  return cfg;
+};
 
-  if (arg_0) {
-    console.log('invalid option: "%s"', arg_0);
-    program.help();
+var merge = function(r, s) {
+  for (var i in s) {
+    r[i] = s[i];
   }
-}
+};
 
-if (program.verbose) {
-  options.verbose = true;
-}
+merge(options, getConfig(program));
 
 global.__detect = global.__detect || {};
 global.__detect.options = options;
