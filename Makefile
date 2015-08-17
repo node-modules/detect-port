@@ -6,10 +6,6 @@ clean:
 	@rm -rf ./node_modules
 install:
 	@npm install
-pull:
-	@git pull origin ${current_version}
-push:
-	@git push origin ${current_version}
 test: install
 	@node --harmony \
 		${npm_bin}/istanbul cover ${npm_bin}/_mocha \

@@ -21,7 +21,7 @@ describe('lib/index.js', function() {
       detect.should.be.a.Function;
     });
     it('should return correct port number', function *() {
-      var port = yield detect(80);
+      var port = yield detect(8080);
       port.should.be.a.Number;
     });
     it('should with verbose', function *() {
@@ -30,11 +30,11 @@ describe('lib/index.js', function() {
           verbose: true
         }
       };
-      var port = yield detect(80);
+      var port = yield detect(8080);
       port.should.be.a.Number;
     });
     it('should get correct port number in callback', function() {
-      detect(80, function(port) {
+      detect(8080, function(error, port) {
         port.should.be.a.Number;
       });
     });
