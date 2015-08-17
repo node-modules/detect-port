@@ -54,7 +54,7 @@ var detect = require('detect-port');
  * normal usage
  */
 
-detect(port, function(_port) {
+detect(port, function(error, _port) {
 
   if (port === _port) {
     console.log('port: %d was not occupied', port);
