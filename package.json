@@ -35,7 +35,7 @@
     "jshint"
   ],
   "engines": {
-    "node": ">= 11.14.x"
+    "node": ">= 0.11.14"
   },
   "author": "xudafeng",
   "homepage": "https://github.com/xudafeng/detect-port",
