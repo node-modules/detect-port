@@ -80,6 +80,20 @@ co(function *() {
   }
 })();
 
+/**
+ * use as a promise
+ */
+
+var promisePort = detect(port);
+
+promisePort.then(function(_port) {
+  if (port === _port) {
+    console.log('port: %d was not occupied', port);
+  } else {
+    console.log('port: %d was occupied, try port: %d', port, _port);
+  }
+});
+
 ```
 
 ## Clone and Run test
