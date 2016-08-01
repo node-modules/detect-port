@@ -1,5 +1,4 @@
-detect-port
-===========
+# detect-port
 
 [![NPM version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]

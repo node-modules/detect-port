@@ -7,5 +7,7 @@ Makefile
 .jshintignore
 coverage/
 *.html
+*.sw*
 plugins/
 docs/
+*.un~
