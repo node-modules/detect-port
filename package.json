@@ -17,8 +17,7 @@
     "url": "git://github.com/xudafeng/detect-port.git"
   },
   "dependencies": {
-    "commander": "~2.8.1",
-    "ipv4": "0.0.4"
+    "commander": "~2.8.1"
   },
   "devDependencies": {
     "mocha": "2.2.4",
