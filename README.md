@@ -14,8 +14,8 @@
 [coveralls-url]: https://coveralls.io/r/xudafeng/detect-port?branch=master
 [node-image]: https://img.shields.io/badge/node.js-%3E=_0.11.14-red.svg?style=flat-square
 [node-url]: http://nodejs.org/download/
-[download-image]: https://img.shields.io/npm/dm/macaca-cli.svg?style=flat-square
-[download-url]: https://npmjs.org/package/macaca-cli
+[download-image]: https://img.shields.io/npm/dm/detect-port.svg?style=flat-square
+[download-url]: https://npmjs.org/package/detect-port
 
 > port detector
 
