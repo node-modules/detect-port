@@ -1,5 +1,4 @@
-Contributing to detect-port
-===========================
+# Contributing to detect-port
 
 - Fork the project, make a change, and send a pull request;
 - Have a look at code style now before starting;
