@@ -51,7 +51,7 @@ describe('lib/index.js', function() {
   describe('command-line tool', function() {
     it('command-line tool should be ok', function *() {
       var cliTest = new CliTest();
-      var binFile = path.resolve(pkg.bin['detect-port'])
+      var binFile = path.resolve(pkg.bin['detect-port']);
       var res = yield cliTest.execFile(binFile, [], {});
       res.stdout.should.containEql('port');
     });
