@@ -12,7 +12,7 @@
 [travis-url]: https://travis-ci.org/xudafeng/detect-port
 [coveralls-image]: https://img.shields.io/coveralls/xudafeng/detect-port.svg?style=flat-square
 [coveralls-url]: https://coveralls.io/r/xudafeng/detect-port?branch=master
-[node-image]: https://img.shields.io/badge/node.js-%3E=_0.11.14-red.svg?style=flat-square
+[node-image]: https://img.shields.io/badge/node.js-%3E=_4-red.svg?style=flat-square
 [node-url]: http://nodejs.org/download/
 [download-image]: https://img.shields.io/npm/dm/detect-port.svg?style=flat-square
 [download-url]: https://npmjs.org/package/detect-port
