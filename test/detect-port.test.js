@@ -13,11 +13,11 @@
 
 'use strict';
 
-const path = require('path');
-const detect = require('..');
-const CliTest = require('command-line-test');
+var path = require('path');
+var detect = require('..');
+var CliTest = require('command-line-test');
 
-const pkg = require('../package');
+var pkg = require('../package');
 
 describe('lib/index.js', function() {
   describe('detect()', function() {
@@ -50,9 +50,9 @@ describe('lib/index.js', function() {
 
   describe('command-line tool', function() {
     it('command-line tool should be ok', function *() {
-      const cliTest = new CliTest();
-      const binFile = path.resolve(pkg.bin['detect-port'])
-      const res = yield cliTest.execFile(binFile, [], {});
+      var cliTest = new CliTest();
+      var binFile = path.resolve(pkg.bin['detect-port'])
+      var res = yield cliTest.execFile(binFile, [], {});
       res.stdout.should.containEql('port');
     });
   });
