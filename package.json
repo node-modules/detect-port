@@ -20,11 +20,12 @@
     "commander": "~2.8.1"
   },
   "devDependencies": {
-    "mocha": "2.2.4",
     "co-mocha": "*",
+    "command-line-test": "^1.0.3",
     "istanbul": "*",
-    "should": "~6.0.3",
-    "jshint": "*"
+    "jshint": "*",
+    "mocha": "2.2.4",
+    "should": "~6.0.3"
   },
   "scripts": {
     "test": "make test",
