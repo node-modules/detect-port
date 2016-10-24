@@ -17,57 +17,34 @@
 [download-image]: https://img.shields.io/npm/dm/detect-port.svg?style=flat-square
 [download-url]: https://npmjs.org/package/detect-port
 
-> port detector
+> JavaScript Implementation of Port Detector
 
-## Installment
-
-```shell
-$ npm i detect-port -g
-```
-
-## Quick Start
-
-```shell
-# detect port 80
-$ detect -p 80
-
-# or like this
-$ detect --port 80
-
-# will get result below
-$ port: 80 was occupied, try port: 1024
-
-# with verbose
-$ detect --port 80 --verbose
-
-# more help?
-$ detect -h
-```
-
-## Use As Module
+## Usage
 
 ```shell
 $ npm i detect-port --save
 ```
 
 ```javascript
-var detect = require('detect-port');
+const detect = require('detect-port');
 
 /**
- * normal usage
+ * callback usage
  */
 
-detect(port, function(error, _port) {
+detect(port, (err, _port) => {
+  if (err) {
+    console.log(err);
+  }
 
   if (port === _port) {
-    console.log('port: %d was not occupied', port);
+    console.log(`port: ${port} was not occupied`);
   } else {
-    console.log('port: %d was occupied, try port: %d', port, _port);
+    console.log(`port: ${port} was occupied, try port: ${_port}`);
   }
 });
 
 /**
- * use in co v3
  * for a yield syntax instead of callback function implement
  */
 
@@ -77,9 +54,9 @@ co(function *() {
   var _port = yield detect(port);
 
   if (port === _port) {
-    console.log('port: %d was not occupied', port);
+    console.log(`port: ${port} was not occupied`);
   } else {
-    console.log('port: %d was occupied, try port: %d', port, _port);
+    console.log(`port: ${port} was occupied, try port: ${_port}`);
   }
 })();
 
@@ -87,36 +64,44 @@ co(function *() {
  * use as a promise
  */
 
-var promisePort = detect(port);
-
-promisePort.then(function(_port) {
-  if (port === _port) {
-    console.log('port: %d was not occupied', port);
-  } else {
-    console.log('port: %d was occupied, try port: %d', port, _port);
-  }
-});
+detect(port)
+  .then(_port => {
+    if (port === _port) {
+      console.log(`port: ${port} was not occupied`);
+    } else {
+      console.log(`port: ${port} was occupied, try port: ${_port}`);
+    }
+  })
+  .catch(err => {
+    console.log(err);
+  });
 
 ```
 
-## Clone and Run test
+## Cli Tool
 
 ```shell
-
-# clone from git
-$ git clone git://github.com/xudafeng/detect-port.git
-
-$ cd detect-port
-
-# install dependencies
-$ make install
-
-# test and coverage
-$ make test
+$ npm i detect-port -g
 ```
+
+### Quick Start
+
+```shell
+# get an available port randomly
+$ detect
+
+# detect pointed port
+$ detect 80
+
+# more help
+$ detect --help
+```
+
+## Authors
+
+- [xudafeng](//github.com/xudafeng)
+- [zenzhu](//github.com/zenzhu)
 
 ## License
 
 [MIT](LICENSE)
-
-Copyright (c) 2015 xdf

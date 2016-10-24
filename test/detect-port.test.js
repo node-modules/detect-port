@@ -13,47 +13,61 @@
 
 'use strict';
 
-var path = require('path');
-var detect = require('..');
-var CliTest = require('command-line-test');
+const detectPort = require('..');
 
-var pkg = require('../package');
+describe('detect port test', () => {
 
-describe('lib/index.js', function() {
-  describe('detect()', function() {
-
-    it('should be a function', function() {
-      detect.should.be.a.Function;
-    });
-
-    it('should return correct port number', function *() {
-      var port = yield detect(8080);
-      port.should.be.a.Number;
-    });
-
-    it('should with verbose', function *() {
-      global.__detect = global.__detect || {
-        options: {
-          verbose: true
-        }
-      };
-      var port = yield detect(8080);
-      port.should.be.a.Number;
-    });
-
-    it('should get correct port number in callback', function() {
-      detect(8080, function(error, port) {
-        port.should.be.a.Number;
-      });
+  it('callback with occupied port', done => {
+    var _port = 80;
+    detectPort(_port, (err, port) => {
+      if (err) {
+        console.log(err);
+      }
+      port.should.within(_port, 65535);
+      done();
     });
   });
 
-  describe('command-line tool', function() {
-    it('command-line tool should be ok', function *() {
-      var cliTest = new CliTest();
-      var binFile = path.resolve(pkg.bin['detect-port']);
-      var res = yield cliTest.execFile(binFile, [], {});
-      res.stdout.should.containEql('port');
+  it('callback with wrong arguments', done => {
+    detectPort('8080', err => {
+      if (err) {
+        err.should.containEql('wrong type of arguments');
+      }
+      done();
     });
+  });
+
+  it('generator usage', function *() {
+    var _port = 8080;
+    try {
+      var port = yield detectPort(8080);
+      port.should.within(_port, 65535);
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
+  it('promise usage', function *() {
+    detectPort(8080)
+      .then(port => {
+        console.log(port);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  });
+
+  it('generator with wrong arguments', function *() {
+    try {
+      yield detectPort();
+    } catch (err) {
+      err.should.containEql('wrong number of arguments');
+    }
+
+    try {
+      yield detectPort('8080');
+    } catch (err) {
+      err.should.containEql('wrong type of arguments');
+    }
   });
 });
