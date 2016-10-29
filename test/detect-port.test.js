@@ -13,47 +13,70 @@
 
 'use strict';
 
-var path = require('path');
-var detect = require('..');
-var CliTest = require('command-line-test');
+const detectPort = require('..');
 
-var pkg = require('../package');
+describe('detect port test', () => {
 
-describe('lib/index.js', function() {
-  describe('detect()', function() {
-
-    it('should be a function', function() {
-      detect.should.be.a.Function;
+  it('callback with occupied port', done => {
+    var _port = 80;
+    detectPort(_port, (err, port) => {
+      if (err) {
+        console.log(err);
+      }
+      port.should.within(_port, 65535);
+      done();
     });
+  });
 
-    it('should return correct port number', function *() {
-      var port = yield detect(8080);
-      port.should.be.a.Number;
+  it('callback with wrong arguments', done => {
+    detectPort('8080', err => {
+      if (err) {
+        err.should.containEql('wrong type of arguments');
+      }
+      done();
     });
+  });
 
-    it('should with verbose', function *() {
-      global.__detect = global.__detect || {
-        options: {
-          verbose: true
-        }
-      };
-      var port = yield detect(8080);
-      port.should.be.a.Number;
-    });
+  it('generator usage', function *() {
+    var _port = 8080;
+    try {
+      var port = yield detectPort(_port);
+      port.should.within(_port, 65535);
+    } catch (err) {
+      console.log(err);
+    }
+  });
 
-    it('should get correct port number in callback', function() {
-      detect(8080, function(error, port) {
-        port.should.be.a.Number;
+  it('promise usage', done => {
+    var _port = 8080;
+    detectPort(_port)
+      .then(port => {
+        port.should.within(_port, 65535);
+        done();
+      })
+      .catch(err => {
+        console.log(err);
+        done();
       });
-    });
   });
 
-  describe('command-line tool', function() {
-    it('command-line tool should be ok', function *() {
-      var cliTest = new CliTest();
-      var binFile = path.resolve(pkg.bin['detect-port']);
-      var res = yield cliTest.execFile(binFile, [], {});
-      res.stdout.should.containEql('port');
-    });
+  it('promise with wrong arguments', done => {
+    detectPort()
+      .then(() => {
+        done();
+      })
+      .catch(err => {
+        err.should.containEql('wrong number of arguments');
+        done();
+      });
   });
+
+  it('generator with wrong arguments', function *() {
+    try {
+      yield detectPort('8080');
+    } catch (err) {
+      err.should.containEql('wrong type of arguments');
+    }
+  });
+
 });
