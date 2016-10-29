@@ -40,34 +40,43 @@ describe('detect port test', () => {
   it('generator usage', function *() {
     var _port = 8080;
     try {
-      var port = yield detectPort(8080);
+      var port = yield detectPort(_port);
       port.should.within(_port, 65535);
     } catch (err) {
       console.log(err);
     }
   });
 
-  it('promise usage', function *() {
-    detectPort(8080)
+  it('promise usage', done => {
+    var _port = 8080;
+    detectPort(_port)
       .then(port => {
-        console.log(port);
+        port.should.within(_port, 65535);
+        done();
       })
       .catch(err => {
         console.log(err);
+        done();
+      });
+  });
+
+  it('promise with wrong arguments', done => {
+    detectPort()
+      .then(() => {
+        done();
+      })
+      .catch(err => {
+        err.should.containEql('wrong number of arguments');
+        done();
       });
   });
 
   it('generator with wrong arguments', function *() {
-    try {
-      yield detectPort();
-    } catch (err) {
-      err.should.containEql('wrong number of arguments');
-    }
-
     try {
       yield detectPort('8080');
     } catch (err) {
       err.should.containEql('wrong type of arguments');
     }
   });
+
 });
