@@ -49,7 +49,7 @@ describe('command-line tool test', () => {
 
   it('should output available port from the given port', function *() {
     const givenPort = 8080;
-    var res = yield cliTest.execFile(binFile, [givenPort], {});
+    const res = yield cliTest.execFile(binFile, [givenPort], {});
     const port = parseInt(res.stdout.split(' ')[3], 10);
     port.should.within(givenPort, 65535);
   });

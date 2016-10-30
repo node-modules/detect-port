@@ -55,10 +55,14 @@ if (!arg_0) {
   console.log(`    ${pkg.homepage}`);
   console.log();
 } else {
-  main(port, (err, port) => {
+  main(port, (err, _port) => {
     if (err) {
       console.log(`get available port failed with ${err}`);
     }
-    console.log(`get available port ${port}`);
+
+    if (port !== _port) {
+      console.log(`port ${port} was occupied`);
+    }
+    console.log(`get available port ${_port}`);
   });
 }
