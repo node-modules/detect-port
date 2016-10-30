@@ -1,11 +1,15 @@
-# detect-port
+[![logo][logo-image]][logo-url]
+
+---
 
 [![NPM version][npm-image]][npm-url]
+[![node version][node-image]][node-url]
 [![build status][travis-image]][travis-url]
 [![Coveralls][coveralls-image]][coveralls-url]
-[![node version][node-image]][node-url]
 [![npm download][download-image]][download-url]
 
+[logo-image]: ./logo.png
+[logo-url]: https://npmjs.org/package/detect-port
 [npm-image]: https://img.shields.io/npm/v/detect-port.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/detect-port
 [travis-image]: https://img.shields.io/travis/xudafeng/detect-port.svg?style=flat-square
@@ -48,17 +52,17 @@ detect(port, (err, _port) => {
  * for a yield syntax instead of callback function implement
  */
 
-var co = require('co');
+const co = require('co');
 
 co(function *() {
-  var _port = yield detect(port);
+  const _port = yield detect(port);
 
   if (port === _port) {
     console.log(`port: ${port} was not occupied`);
   } else {
     console.log(`port: ${port} was occupied, try port: ${_port}`);
   }
-})();
+});
 
 /**
  * use as a promise
@@ -78,7 +82,7 @@ detect(port)
 
 ```
 
-## Cli Tool
+## Command Line Tool
 
 ```shell
 $ npm i detect-port -g

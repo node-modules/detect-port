@@ -18,7 +18,7 @@ const detectPort = require('..');
 describe('detect port test', () => {
 
   it('callback with occupied port', done => {
-    var _port = 80;
+    const _port = 80;
     detectPort(_port, (err, port) => {
       if (err) {
         console.log(err);
@@ -38,9 +38,9 @@ describe('detect port test', () => {
   });
 
   it('generator usage', function *() {
-    var _port = 8080;
+    const _port = 8080;
     try {
-      var port = yield detectPort(_port);
+      const port = yield detectPort(_port);
       port.should.within(_port, 65535);
     } catch (err) {
       console.log(err);
@@ -48,7 +48,7 @@ describe('detect port test', () => {
   });
 
   it('promise usage', done => {
-    var _port = 8080;
+    const _port = 8080;
     detectPort(_port)
       .then(port => {
         port.should.within(_port, 65535);
