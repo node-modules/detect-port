@@ -28,11 +28,20 @@ describe('detect port test', () => {
     });
   });
 
-  it('callback with wrong arguments', done => {
-    detectPort('8080', err => {
+  it('callback with string arg', done => {
+    const _port = '8080';
+    detectPort(_port, (err, port) => {
       if (err) {
-        err.should.containEql('wrong type of arguments');
+        console.log(err);
       }
+      port.should.within(parseInt(_port, 10), 65535);
+      done();
+    });
+  });
+
+  it('callback with wrong arguments', done => {
+    detectPort('oooo', err => {
+      err.should.containEql('wrong type of arguments');
       done();
     });
   });
@@ -73,7 +82,7 @@ describe('detect port test', () => {
 
   it('generator with wrong arguments', function *() {
     try {
-      yield detectPort('8080');
+      yield detectPort('oooo');
     } catch (err) {
       err.should.containEql('wrong type of arguments');
     }

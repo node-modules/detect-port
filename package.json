@@ -1,6 +1,6 @@
 {
   "name": "detect-port",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "detect available port",
   "keywords": [
     "detect",
@@ -23,7 +23,8 @@
     "jshint": "*",
     "mocha": "2.2.4",
     "pre-commit": "^1.1.3",
-    "should": "~6.0.3"
+    "should": "~6.0.3",
+    "startserver": "^1.3.1"
   },
   "scripts": {
     "test": "make test",
