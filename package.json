@@ -13,7 +13,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/xudafeng/detect-port.git"
+    "url": "git://github.com/node-modules/detect-port.git"
   },
   "dependencies": {},
   "devDependencies": {
@@ -35,6 +35,6 @@
   "engines": {
     "node": ">= 4.2.1"
   },
-  "homepage": "https://github.com/xudafeng/detect-port",
+  "homepage": "https://github.com/node-modules/detect-port",
   "license": "MIT"
 }

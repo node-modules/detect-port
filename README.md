@@ -12,10 +12,10 @@
 [logo-url]: https://npmjs.org/package/detect-port
 [npm-image]: https://img.shields.io/npm/v/detect-port.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/detect-port
-[travis-image]: https://img.shields.io/travis/xudafeng/detect-port.svg?style=flat-square
-[travis-url]: https://travis-ci.org/xudafeng/detect-port
-[coveralls-image]: https://img.shields.io/coveralls/xudafeng/detect-port.svg?style=flat-square
-[coveralls-url]: https://coveralls.io/r/xudafeng/detect-port?branch=master
+[travis-image]: https://img.shields.io/travis/node-modules/detect-port.svg?style=flat-square
+[travis-url]: https://travis-ci.org/node-modules/detect-port
+[coveralls-image]: https://img.shields.io/coveralls/node-modules/detect-port.svg?style=flat-square
+[coveralls-url]: https://coveralls.io/r/node-modules/detect-port?branch=master
 [node-image]: https://img.shields.io/badge/node.js-%3E=_4-red.svg?style=flat-square
 [node-url]: http://nodejs.org/download/
 [download-image]: https://img.shields.io/npm/dm/detect-port.svg?style=flat-square
