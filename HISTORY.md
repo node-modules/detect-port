@@ -1,3 +1,8 @@
+# 1.0.7 / 2016-12-11
+
+  * Early return for rejected promise
+  * Prevent promsie swallow in callback
+
 # 1.0.6 / 2016-11-29
 
   * Bump version for new Repo
