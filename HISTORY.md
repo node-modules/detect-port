@@ -1,3 +1,7 @@
+# 1.1.0 / 2016-01-17
+
+  * Use server listen to detect port
+
 # 1.0.7 / 2016-12-11
 
   * Early return for rejected promise
