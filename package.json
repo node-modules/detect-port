@@ -15,25 +15,26 @@
     "type": "git",
     "url": "git://github.com/node-modules/detect-port.git"
   },
-  "dependencies": {},
+  "dependencies": {
+    "debug": "^2.6.0"
+  },
   "devDependencies": {
-    "co-mocha": "*",
     "command-line-test": "^1.0.8",
-    "istanbul": "*",
-    "jshint": "*",
-    "mocha": "2.2.4",
-    "pre-commit": "^1.1.3",
-    "should": "~6.0.3"
+    "egg-bin": "^2.0.0",
+    "egg-ci": "^1.1.0",
+    "eslint": "^3.13.1",
+    "eslint-config-egg": "^3.1.0"
   },
   "scripts": {
-    "test": "make test",
-    "jshint": "make jshint"
+    "test": "egg-bin test",
+    "ci": "npm run lint && egg-bin cov",
+    "lint": "eslint ."
   },
-  "precommit": [
-    "jshint"
-  ],
   "engines": {
     "node": ">= 4.2.1"
+  },
+  "ci": {
+    "version": "4, 6, 7"
   },
   "homepage": "https://github.com/node-modules/detect-port",
   "license": "MIT"

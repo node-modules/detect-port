@@ -1,8 +1,12 @@
+sudo: false
 language: node_js
 node_js:
-  - "4"
-  - "5"
-  - "6"
-sudo: false
-script: make travis
-after_script: "npm install coveralls@2 && cat ./coverage/lcov.info | coveralls"
+  - '4'
+  - '6'
+  - '7'
+install:
+  - npm i npminstall && npminstall
+script:
+  - npm run ci
+after_script:
+  - npminstall codecov && codecov
