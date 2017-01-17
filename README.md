@@ -3,9 +3,8 @@
 ---
 
 [![NPM version][npm-image]][npm-url]
-[![node version][node-image]][node-url]
 [![build status][travis-image]][travis-url]
-[![Coveralls][coveralls-image]][coveralls-url]
+[![Test coverage][codecov-image]][codecov-url]
 [![npm download][download-image]][download-url]
 
 [logo-image]: ./logo.png
@@ -14,10 +13,8 @@
 [npm-url]: https://npmjs.org/package/detect-port
 [travis-image]: https://img.shields.io/travis/node-modules/detect-port.svg?style=flat-square
 [travis-url]: https://travis-ci.org/node-modules/detect-port
-[coveralls-image]: https://img.shields.io/coveralls/node-modules/detect-port.svg?style=flat-square
-[coveralls-url]: https://coveralls.io/r/node-modules/detect-port?branch=master
-[node-image]: https://img.shields.io/badge/node.js-%3E=_4-red.svg?style=flat-square
-[node-url]: http://nodejs.org/download/
+[codecov-image]: https://codecov.io/gh/node-modules/detect-port/branch/master/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/node-modules/detect-port
 [download-image]: https://img.shields.io/npm/dm/detect-port.svg?style=flat-square
 [download-url]: https://npmjs.org/package/detect-port
 
@@ -25,11 +22,11 @@
 
 ## Usage
 
-```shell
+```bash
 $ npm i detect-port --save
 ```
 
-```javascript
+```js
 const detect = require('detect-port');
 
 /**
