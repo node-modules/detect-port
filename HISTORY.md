@@ -1,3 +1,8 @@
+
+# 1.1.1 / 2017-03-17
+
+  * fix: try to use next available port (#16)
+
 # 1.1.0 / 2016-01-17
 
   * Use server listen to detect port
