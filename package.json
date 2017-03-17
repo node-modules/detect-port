@@ -23,7 +23,8 @@
     "egg-bin": "^2.0.0",
     "egg-ci": "^1.1.0",
     "eslint": "^3.13.1",
-    "eslint-config-egg": "^3.1.0"
+    "eslint-config-egg": "^3.1.0",
+    "pedding": "^1.1.0"
   },
   "scripts": {
     "test": "egg-bin test",
