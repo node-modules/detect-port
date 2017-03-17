@@ -2,16 +2,24 @@
 
 const assert = require('assert');
 const net = require('net');
+const pedding = require('pedding');
 const detectPort = require('..');
 
 describe('detect port test', () => {
-  let server;
+  const servers = [];
   before(done => {
-    server = new net.Server();
-    server.listen(7001, done);
+    done = pedding(11, done);
+    const server = new net.Server();
+    server.listen(3000, done);
+    servers.push(server);
+    for (let port = 7000; port < 7010; port++) {
+      const server = new net.Server();
+      server.listen(port, done);
+      servers.push(server);
+    }
   });
   after(() => {
-    server.close();
+    servers.forEach(server => server.close());
   });
 
   it('get random port', done => {
@@ -29,11 +37,18 @@ describe('detect port test', () => {
     });
   });
 
-  it('work with listening port', done => {
-    const port = 7001;
+  it('work with listening next port 3001', done => {
+    const port = 3000;
     detectPort(port, (_, realPort) => {
-      assert(realPort !== 7001);
-      assert(realPort > 0);
+      assert(realPort === 3001);
+      done();
+    });
+  });
+
+  it('work with listening random port when try port hit maxPort', done => {
+    const port = 7000;
+    detectPort(port, (_, realPort) => {
+      assert(realPort < 7000 || realPort > 7009);
       done();
     });
   });
