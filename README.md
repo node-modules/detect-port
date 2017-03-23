@@ -38,7 +38,7 @@ detect(port, (err, _port) => {
     console.log(err);
   }
 
-  if (port === _port) {
+  if (port == _port) {
     console.log(`port: ${port} was not occupied`);
   } else {
     console.log(`port: ${port} was occupied, try port: ${_port}`);
@@ -54,7 +54,7 @@ const co = require('co');
 co(function *() {
   const _port = yield detect(port);
 
-  if (port === _port) {
+  if (port == _port) {
     console.log(`port: ${port} was not occupied`);
   } else {
     console.log(`port: ${port} was occupied, try port: ${_port}`);
@@ -67,7 +67,7 @@ co(function *() {
 
 detect(port)
   .then(_port => {
-    if (port === _port) {
+    if (port == _port) {
       console.log(`port: ${port} was not occupied`);
     } else {
       console.log(`port: ${port} was occupied, try port: ${_port}`);
