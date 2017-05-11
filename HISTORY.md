@@ -1,4 +1,10 @@
 
+1.1.2 / 2017-05-11
+==================
+
+  * fix: should double check 0.0.0.0 and localhost (#20)
+  * docs: ignore type of port when checking if it's occupied (#18)
+
 # 1.1.1 / 2017-03-17
 
   * fix: try to use next available port (#16)
