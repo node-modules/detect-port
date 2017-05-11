@@ -3,18 +3,30 @@
 const assert = require('assert');
 const net = require('net');
 const pedding = require('pedding');
+const address = require('address');
 const detectPort = require('..');
 
 describe('detect port test', () => {
   const servers = [];
   before(done => {
-    done = pedding(11, done);
+    done = pedding(12, done);
     const server = new net.Server();
-    server.listen(3000, done);
+    server.listen(3000, 'localhost', done);
     servers.push(server);
+
+    const server2 = new net.Server();
+    server2.listen(4000, address.ip(), done);
+    servers.push(server2);
+
     for (let port = 7000; port < 7010; port++) {
       const server = new net.Server();
-      server.listen(port, done);
+      if (port % 3 === 0) {
+        server.listen(port, done);
+      } else if (port % 3 === 1) {
+        server.listen(port, 'localhost', done);
+      } else {
+        server.listen(port, address.ip(), done);
+      }
       servers.push(server);
     }
   });
@@ -37,10 +49,18 @@ describe('detect port test', () => {
     });
   });
 
-  it('work with listening next port 3001', done => {
+  it('work with listening next port 3001 because 3000 was listen by localhost', done => {
     const port = 3000;
     detectPort(port, (_, realPort) => {
       assert(realPort === 3001);
+      done();
+    });
+  });
+
+  it('work with listening next port 4001 because 4000 was listen by ' + address.ip(), done => {
+    const port = 4000;
+    detectPort(port, (_, realPort) => {
+      assert(realPort === 4001);
       done();
     });
   });
