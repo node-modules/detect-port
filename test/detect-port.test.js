@@ -10,11 +10,15 @@ describe('detect port test', () => {
   before(done => {
     done = pedding(11, done);
     const server = new net.Server();
-    server.listen(3000, done);
+    server.listen(3000, 'localhost', done);
     servers.push(server);
     for (let port = 7000; port < 7010; port++) {
       const server = new net.Server();
-      server.listen(port, done);
+      if (port % 2 === 0) {
+        server.listen(port, done);
+      } else {
+        server.listen(port, 'localhost', done);
+      }
       servers.push(server);
     }
   });
