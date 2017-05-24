@@ -1,4 +1,9 @@
 
+1.1.3 / 2017-05-24
+==================
+
+  * fix: should ignore getaddrinfo ENOTFOUND error (#22)
+
 1.1.2 / 2017-05-11
 ==================
 
