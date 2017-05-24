@@ -4,6 +4,8 @@ const assert = require('assert');
 const net = require('net');
 const pedding = require('pedding');
 const address = require('address');
+const mm = require('mm');
+const dns = require('dns');
 const detectPort = require('..');
 
 describe('detect port test', () => {
@@ -12,6 +14,9 @@ describe('detect port test', () => {
     done = pedding(12, done);
     const server = new net.Server();
     server.listen(3000, 'localhost', done);
+    server.on('error', err => {
+      console.error('listen localhost error:', err);
+    });
     servers.push(server);
 
     const server2 = new net.Server();
@@ -34,6 +39,8 @@ describe('detect port test', () => {
     servers.forEach(server => server.close());
   });
 
+  afterEach(mm.restore);
+
   it('get random port', done => {
     detectPort((_, port) => {
       assert(port >= 1024 && port < 65535);
@@ -53,6 +60,27 @@ describe('detect port test', () => {
     const port = 3000;
     detectPort(port, (_, realPort) => {
       assert(realPort === 3001);
+      done();
+    });
+  });
+
+  it('should listen next port 4001 when localhost is not binding', done => {
+    // https://github.com/nodejs/node/blob/6af72d4b037eba38d94395f57a03a498a2efef09/lib/net.js#L1463
+    // mock dns.lookup
+    mm(dns, '__rawLookup', dns.lookup);
+    mm(dns, 'lookup', (address, callback) => {
+      if (address !== 'localhost') {
+        return dns.__rawLookup(address, callback);
+      }
+      process.nextTick(() => {
+        const err = new Error(`getaddrinfo ENOTFOUND ${address}`);
+        err.code = 'ENOTFOUND';
+        callback(err);
+      });
+    });
+    const port = 4000;
+    detectPort(port, (_, realPort) => {
+      assert(realPort === 4001);
       done();
     });
   });
