@@ -7,7 +7,7 @@ const pkg = require('../package');
 const args = process.argv.slice(2);
 const arg_0 = args[0];
 
-if (!!~['-v', '--version'].indexOf(arg_0)) {
+if (arg_0 && !!~['-v', '--version'].indexOf(arg_0.toLowerCase())) {
   console.log(pkg.version);
   process.exit(0);
 }
@@ -35,7 +35,8 @@ if (!arg_0) {
   console.log();
   console.log('  Options:');
   console.log();
-  console.log('    -v, --version    show version and exit');
+  console.log('    -v, --version    output version and exit');
+  console.log('    -s, --silent     output port without verbose log');
   console.log('    -h, --help       output usage information');
   console.log();
   console.log('  Further help:');
@@ -43,14 +44,21 @@ if (!arg_0) {
   console.log(`    ${pkg.homepage}`);
   console.log();
 } else {
-  main(port, (err, _port) => {
-    if (err) {
-      console.log(`get available port failed with ${err}`);
-    }
+  const isSilent = !!~process.argv.indexOf('-s') || !!~process.argv.indexOf('--silent');
 
-    if (port !== _port) {
-      console.log(`port ${port} was occupied`);
+  main(port, (err, _port) => {
+    if (isSilent) {
+      console.log(_port || port);
+    } else {
+      if (err) {
+        console.log(`get available port failed with ${err}`);
+      }
+
+      if (port !== _port) {
+        console.log(`port ${port} was occupied`);
+      }
+
+      console.log(`get available port ${_port}`);
     }
-    console.log(`get available port ${_port}`);
   });
 }
