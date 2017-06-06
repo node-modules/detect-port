@@ -1,12 +1,12 @@
 'use strict';
 
-const assert = require('assert');
-const net = require('net');
-const pedding = require('pedding');
-const address = require('address');
 const mm = require('mm');
 const dns = require('dns');
+const net = require('net');
 const detectPort = require('..');
+const assert = require('assert');
+const pedding = require('pedding');
+const address = require('address');
 
 describe('detect port test', () => {
   const servers = [];
