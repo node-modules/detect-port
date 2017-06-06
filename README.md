@@ -94,6 +94,9 @@ $ detect
 # detect pointed port
 $ detect 80
 
+# output verbose log
+$ detect --verbose
+
 # more help
 $ detect --help
 ```
