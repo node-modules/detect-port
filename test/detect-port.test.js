@@ -11,7 +11,7 @@ const address = require('address');
 describe('detect port test', () => {
   const servers = [];
   before(done => {
-    done = pedding(12, done);
+    done = pedding(13, done);
     const server = new net.Server();
     server.listen(3000, 'localhost', done);
     server.on('error', err => {
@@ -22,6 +22,10 @@ describe('detect port test', () => {
     const server2 = new net.Server();
     server2.listen(4000, address.ip(), done);
     servers.push(server2);
+
+    const server3 = new net.Server();
+    server3.listen(8080, '0.0.0.0', done);
+    servers.push(server3);
 
     for (let port = 7000; port < 7010; port++) {
       const server = new net.Server();
@@ -56,7 +60,7 @@ describe('detect port test', () => {
     });
   });
 
-  it('work with listening next port 3001 because 3000 was listen by localhost', done => {
+  it('work with listening next port 3001 because 3000 was listened to localhost', done => {
     const port = 3000;
     detectPort(port, (_, realPort) => {
       assert(realPort === 3001);
@@ -85,10 +89,18 @@ describe('detect port test', () => {
     });
   });
 
-  it('work with listening next port 4001 because 4000 was listen by ' + address.ip(), done => {
+  it('work with listening next port 4001 because 4000 was listened to ' + address.ip(), done => {
     const port = 4000;
     detectPort(port, (_, realPort) => {
       assert(realPort === 4001);
+      done();
+    });
+  });
+
+  it('work with listening next port 8081 because 8080 was listened to 0.0.0.0:8080', done => {
+    const port = 8080;
+    detectPort(port, (_, realPort) => {
+      assert(realPort === 8081);
       done();
     });
   });
