@@ -22,11 +22,11 @@
 
 ## Usage
 
-```bash
+``` bash
 $ npm i detect-port --save
 ```
 
-```js
+``` javascript
 const detect = require('detect-port');
 
 /**
@@ -81,13 +81,13 @@ detect(port)
 
 ## Command Line Tool
 
-```shell
+``` bash
 $ npm i detect-port -g
 ```
 
 ### Quick Start
 
-```shell
+``` bash
 # get an available port randomly
 $ detect
 
