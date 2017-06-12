@@ -2,8 +2,9 @@
 
 const path = require('path');
 const assert = require('assert');
-const pkg = require('../package');
 const CliTest = require('command-line-test');
+
+const pkg = require('../package');
 
 const cliTest = new CliTest();
 const binFile = path.resolve(pkg.bin[pkg.name]);
