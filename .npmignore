@@ -1,13 +1,9 @@
 .travis.yml
-.drone.yml
-examples/
 test/
 Makefile
-.jshintrc
-.jshintignore
 coverage/
 *.html
+*.yml
 *.sw*
-plugins/
-docs/
 *.un~
+*.png
