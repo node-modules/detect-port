@@ -13,7 +13,7 @@
 [npm-url]: https://npmjs.org/package/detect-port
 [travis-image]: https://img.shields.io/travis/node-modules/detect-port.svg?style=flat-square
 [travis-url]: https://travis-ci.org/node-modules/detect-port
-[codecov-image]: https://codecov.io/gh/node-modules/detect-port/branch/master/graph/badge.svg
+[codecov-image]: https://img.shields.io/coveralls/node-modules/detect-port.svg?style=flat-square
 [codecov-url]: https://codecov.io/gh/node-modules/detect-port
 [download-image]: https://img.shields.io/npm/dm/detect-port.svg?style=flat-square
 [download-url]: https://npmjs.org/package/detect-port
@@ -100,11 +100,6 @@ $ detect --verbose
 # more help
 $ detect --help
 ```
-
-## Authors
-
-- [xudafeng](//github.com/xudafeng)
-- [zenzhu](//github.com/zenzhu)
 
 ## License
 
