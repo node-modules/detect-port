@@ -18,7 +18,7 @@
 [download-image]: https://img.shields.io/npm/dm/detect-port.svg?style=flat-square
 [download-url]: https://npmjs.org/package/detect-port
 
-> JavaScript Implementation of Port Detector
+> Node.js implementation of port detector
 
 ## Usage
 
