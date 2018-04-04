@@ -101,6 +101,28 @@ $ detect --verbose
 $ detect --help
 ```
 
+## FAQ
+
+Most likely network error, check that your `/etc/hosts` and make sure the content below:
+
+```
+127.0.0.1       localhost
+255.255.255.255 broadcasthost
+::1             localhost
+```
+
+<!-- GITCONTRIBUTOR_START -->
+
+## Contributors
+
+|[<img src="https://avatars1.githubusercontent.com/u/1011681?v=4" width="100px;"/><br/><sub><b>xudafeng</b></sub>](https://github.com/xudafeng)<br/>|[<img src="https://avatars2.githubusercontent.com/u/197375?v=4" width="100px;"/><br/><sub><b>jsw0528</b></sub>](https://github.com/jsw0528)<br/>|[<img src="https://avatars1.githubusercontent.com/u/1044425?v=4" width="100px;"/><br/><sub><b>ziczhu</b></sub>](https://github.com/ziczhu)<br/>|[<img src="https://avatars0.githubusercontent.com/u/156269?v=4" width="100px;"/><br/><sub><b>fengmk2</b></sub>](https://github.com/fengmk2)<br/>
+| :---: | :---: | :---: | :---: |
+
+
+This project follows the git-contributor [spec](https://github.com/xudafeng/git-contributor), auto upated at `Wed Apr 04 2018 17:15:09 GMT+0800`.
+
+<!-- GITCONTRIBUTOR_END -->
+
 ## License
 
 [MIT](LICENSE)

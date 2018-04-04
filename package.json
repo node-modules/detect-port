@@ -25,13 +25,15 @@
     "egg-ci": "^1.1.0",
     "eslint": "^3.13.1",
     "eslint-config-egg": "^3.1.0",
+    "git-contributor": "^1.0.5",
     "mm": "^2.1.0",
     "pedding": "^1.1.0"
   },
   "scripts": {
     "test": "egg-bin test",
     "ci": "npm run lint && egg-bin cov",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "contributor": "git-contributor"
   },
   "engines": {
     "node": ">= 4.2.1"
