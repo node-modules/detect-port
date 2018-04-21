@@ -25,7 +25,7 @@
     "egg-ci": "^1.1.0",
     "eslint": "^3.13.1",
     "eslint-config-egg": "^3.1.0",
-    "git-contributor": "^1.0.5",
+    "git-contributor": "^1.0.8",
     "mm": "^2.1.0",
     "pedding": "^1.1.0"
   },
