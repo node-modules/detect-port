@@ -11,6 +11,11 @@
     "detect-port": "./bin/detect-port"
   },
   "main": "index.js",
+  "files": [
+    "bin",
+    "lib",
+    "index.js"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/node-modules/detect-port.git"
