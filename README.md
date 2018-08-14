@@ -115,11 +115,11 @@ Most likely network error, check that your `/etc/hosts` and make sure the conten
 
 ## Contributors
 
-|[<img src="https://avatars1.githubusercontent.com/u/1011681?v=4" width="100px;"/><br/><sub><b>xudafeng</b></sub>](https://github.com/xudafeng)<br/>|[<img src="https://avatars0.githubusercontent.com/u/156269?v=4" width="100px;"/><br/><sub><b>fengmk2</b></sub>](https://github.com/fengmk2)<br/>|[<img src="https://avatars1.githubusercontent.com/u/1044425?v=4" width="100px;"/><br/><sub><b>ziczhu</b></sub>](https://github.com/ziczhu)<br/>|[<img src="https://avatars0.githubusercontent.com/u/810438?v=4" width="100px;"/><br/><sub><b>gaearon</b></sub>](https://github.com/gaearon)<br/>|[<img src="https://avatars2.githubusercontent.com/u/197375?v=4" width="100px;"/><br/><sub><b>jsw0528</b></sub>](https://github.com/jsw0528)<br/>
-| :---: | :---: | :---: | :---: | :---: |
+|[<img src="https://avatars1.githubusercontent.com/u/1011681?v=4" width="100px;"/><br/><sub><b>xudafeng</b></sub>](https://github.com/xudafeng)<br/>|[<img src="https://avatars0.githubusercontent.com/u/156269?v=4" width="100px;"/><br/><sub><b>fengmk2</b></sub>](https://github.com/fengmk2)<br/>|[<img src="https://avatars1.githubusercontent.com/u/1044425?v=4" width="100px;"/><br/><sub><b>ziczhu</b></sub>](https://github.com/ziczhu)<br/>|[<img src="https://avatars0.githubusercontent.com/u/810438?v=4" width="100px;"/><br/><sub><b>gaearon</b></sub>](https://github.com/gaearon)<br/>|[<img src="https://avatars1.githubusercontent.com/u/360661?v=4" width="100px;"/><br/><sub><b>popomore</b></sub>](https://github.com/popomore)<br/>|[<img src="https://avatars2.githubusercontent.com/u/197375?v=4" width="100px;"/><br/><sub><b>jsw0528</b></sub>](https://github.com/jsw0528)<br/>
+| :---: | :---: | :---: | :---: | :---: | :---: |
 
 
-This project follows the git-contributor [spec](https://github.com/xudafeng/git-contributor), auto upated at `Sat Apr 21 2018 17:33:10 GMT+0800`.
+This project follows the git-contributor [spec](https://github.com/xudafeng/git-contributor), auto upated at `Tue Aug 14 2018 12:43:52 GMT+0800`.
 
 <!-- GITCONTRIBUTOR_END -->
 
