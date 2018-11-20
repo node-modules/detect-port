@@ -113,6 +113,31 @@ describe('detect port test', () => {
     });
   });
 
+  it('work with sending object with hostname', done => {
+    const port = 7000;
+    const hostname = '127.0.0.1';
+    detectPort({
+      port,
+      hostname,
+      callback: (_, realPort) => {
+        assert(realPort >= 7000 && realPort < 65535);
+        done();
+      },
+    });
+  });
+
+  it('promise with sending object with hostname', done => {
+    const port = 7000;
+    const hostname = '127.0.0.1';
+    detectPort({
+      port,
+      hostname,
+    }).then(realPort => {
+      assert(realPort >= 7000 && realPort < 65535);
+      done();
+    });
+  });
+
   it('callback with string arg', done => {
     const _port = '8080';
     detectPort(_port, (_, port) => {
