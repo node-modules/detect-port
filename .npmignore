@@ -1,9 +1,0 @@
-.travis.yml
-test/
-Makefile
-coverage/
-*.html
-*.yml
-*.sw*
-*.un~
-*.png
