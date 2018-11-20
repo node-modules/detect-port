@@ -1,4 +1,14 @@
 
+1.3.0 / 2018-11-20
+==================
+
+**features**
+  * [[`a00357a`](http://github.com/node-modules/detect-port/commit/a00357aea32c4f011b7240641cb8da2dfc97b491)] - feat: support detect port with custom hostname (#35) (Ender Lee <<34906299+chnliquan@users.noreply.github.com>>)
+
+**others**
+  * [[`671094f`](http://github.com/node-modules/detect-port/commit/671094f3a3660a29a0920d78e39d17f8dead0b7a)] - update readme (xudafeng <<xudafeng@126.com>>)
+  * [[`285e59b`](http://github.com/node-modules/detect-port/commit/285e59b0464d670c886007ff5052892393d57314)] - chore: add files to package.json (fengmk2 <<fengmk2@gmail.com>>)
+
 1.2.3 / 2018-05-16
 ==================
 
