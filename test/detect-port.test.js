@@ -153,6 +153,20 @@ describe('detect port test', () => {
       .catch(done);
   });
 
+  it('sending unkonwn hostname with promise', done => {
+    detectPort({
+      port: 8888,
+      hostname: '128.1.2.3',
+    })
+      .then(port => {
+        assert(port > 0);
+      })
+      .catch(err => {
+        assert(err.message === 'the ip that is not unkonwn on the machine');
+        done();
+      });
+  });
+
   it('generator with wrong arguments and return random port', function* () {
     const port = yield detectPort('oooo');
     assert(port > 0);
