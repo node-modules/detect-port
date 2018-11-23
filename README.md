@@ -77,6 +77,23 @@ detect(port)
     console.log(err);
   });
 
+/**
+ * param with hostname
+ */
+detect({
+  port,
+  hostname
+})
+  .then(_port => {
+    if (port == _port) {
+      console.log(`port: ${port} was not occupied`);
+    } else {
+      console.log(`port: ${port} was occupied, try port: ${_port}`);
+    }
+  })
+  .catch(err => {
+    console.log(err);
+  })
 ```
 
 ## Command Line Tool
