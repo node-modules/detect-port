@@ -20,6 +20,17 @@
 
 > Node.js implementation of port detector
 
+## Who are using
+
+- ⭐⭐⭐[alibaba/ice](//github.com/alibaba/ice/blob/master/tools/iceworks-app/package.json)
+- ⭐⭐⭐[alibaba/uirecorder](//github.com/alibaba/uirecorder)
+- ⭐⭐⭐[facebook/create-react-app](//github.com/facebook/create-react-app/blob/master/packages/react-dev-utils/package.json)
+- ⭐⭐⭐[facebook/flipper](//github.com/facebook/flipper)
+- ⭐⭐⭐[umijs/umi](//github.com/umijs/umi/blob/master/packages/af-webpack/package.json)
+- ⭐⭐⭐[gatsbyjs/gatsby](//github.com/gatsbyjs/gatsby)
+
+[For more](//github.com/node-modules/detect-port/network/dependents)
+
 ## Usage
 
 ```bash
@@ -115,11 +126,11 @@ Most likely network error, check that your `/etc/hosts` and make sure the conten
 
 ## Contributors
 
-|[<img src="https://avatars1.githubusercontent.com/u/1011681?v=4" width="100px;"/><br/><sub><b>xudafeng</b></sub>](https://github.com/xudafeng)<br/>|[<img src="https://avatars0.githubusercontent.com/u/156269?v=4" width="100px;"/><br/><sub><b>fengmk2</b></sub>](https://github.com/fengmk2)<br/>|[<img src="https://avatars1.githubusercontent.com/u/1044425?v=4" width="100px;"/><br/><sub><b>ziczhu</b></sub>](https://github.com/ziczhu)<br/>|[<img src="https://avatars0.githubusercontent.com/u/810438?v=4" width="100px;"/><br/><sub><b>gaearon</b></sub>](https://github.com/gaearon)<br/>|[<img src="https://avatars1.githubusercontent.com/u/360661?v=4" width="100px;"/><br/><sub><b>popomore</b></sub>](https://github.com/popomore)<br/>|[<img src="https://avatars2.githubusercontent.com/u/197375?v=4" width="100px;"/><br/><sub><b>jsw0528</b></sub>](https://github.com/jsw0528)<br/>
+|[<img src="https://avatars1.githubusercontent.com/u/1011681?v=4" width="100px;"/><br/><sub><b>xudafeng</b></sub>](https://github.com/xudafeng)<br/>|[<img src="https://avatars0.githubusercontent.com/u/156269?v=4" width="100px;"/><br/><sub><b>fengmk2</b></sub>](https://github.com/fengmk2)<br/>|[<img src="https://avatars1.githubusercontent.com/u/1044425?v=4" width="100px;"/><br/><sub><b>ziczhu</b></sub>](https://github.com/ziczhu)<br/>|[<img src="https://avatars0.githubusercontent.com/u/810438?v=4" width="100px;"/><br/><sub><b>gaearon</b></sub>](https://github.com/gaearon)<br/>|[<img src="https://avatars3.githubusercontent.com/u/34906299?v=4" width="100px;"/><br/><sub><b>chnliquan</b></sub>](https://github.com/chnliquan)<br/>|[<img src="https://avatars1.githubusercontent.com/u/360661?v=4" width="100px;"/><br/><sub><b>popomore</b></sub>](https://github.com/popomore)<br/>|
 | :---: | :---: | :---: | :---: | :---: | :---: |
+[<img src="https://avatars2.githubusercontent.com/u/197375?v=4" width="100px;"/><br/><sub><b>iamyinyue</b></sub>](https://github.com/iamyinyue)<br/>
 
-
-This project follows the git-contributor [spec](https://github.com/xudafeng/git-contributor), auto upated at `Tue Aug 14 2018 12:43:52 GMT+0800`.
+This project follows the git-contributor [spec](https://github.com/xudafeng/git-contributor), auto updated at `Tue Jul 30 2019 22:07:39 GMT+0800`.
 
 <!-- GITCONTRIBUTOR_END -->
 
