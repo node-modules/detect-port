@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 'use strict';
 
 const pkg = require('../package');
@@ -7,13 +5,13 @@ const pkg = require('../package');
 const args = process.argv.slice(2);
 let arg_0 = args[0];
 
-if (arg_0 && !!~['-v', '--version'].indexOf(arg_0.toLowerCase())) {
+if (arg_0 && [ '-v', '--version' ].includes(arg_0.toLowerCase())) {
   console.log(pkg.version);
   process.exit(0);
 }
 
 const removeByValue = (arr, val) => {
-  for (var i = 0; i < arr.length; i++) {
+  for (let i = 0; i < arr.length; i++) {
     if (arr[i] === val) {
       arr.splice(i, 1);
       break;
@@ -24,7 +22,7 @@ const removeByValue = (arr, val) => {
 const main = require('..');
 
 const port = parseInt(arg_0, 10);
-const isVerbose = !!~args.indexOf('--verbose');
+const isVerbose = args.includes('--verbose');
 
 removeByValue(args, '--verbose');
 arg_0 = args[0];

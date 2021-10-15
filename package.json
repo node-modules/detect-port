@@ -7,13 +7,13 @@
     "port"
   ],
   "bin": {
-    "detect": "./bin/detect-port",
-    "detect-port": "./bin/detect-port"
+    "detect": "./bin/detect-port.js",
+    "detect-port": "./bin/detect-port.js"
   },
   "main": "index.js",
   "files": [
-    "bin",
-    "lib",
+    "bin/**/*.js",
+    "lib/**/*.js",
     "index.js"
   ],
   "repository": {
@@ -30,7 +30,7 @@
     "egg-ci": "^1.1.0",
     "eslint": "^6.1.0",
     "eslint-config-egg": "^3.1.0",
-    "git-contributor": "^1.0.8",
+    "git-contributor": "1",
     "mm": "^2.1.0",
     "pedding": "^1.1.0"
   },

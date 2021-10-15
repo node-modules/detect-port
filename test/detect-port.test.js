@@ -3,10 +3,11 @@
 const mm = require('mm');
 const dns = require('dns');
 const net = require('net');
-const detectPort = require('..');
 const assert = require('assert');
 const pedding = require('pedding');
 const address = require('address');
+
+const detectPort = require('..');
 
 describe('detect port test', () => {
   const servers = [];
@@ -153,9 +154,9 @@ describe('detect port test', () => {
     });
   });
 
-  it('generator usage', function* () {
+  it('generator usage', async () => {
     const _port = 8080;
-    const port = yield detectPort(_port);
+    const port = await detectPort(_port);
     assert(port >= _port && port < 65535);
   });
 
@@ -178,8 +179,8 @@ describe('detect port test', () => {
       .catch(done);
   });
 
-  it('generator with wrong arguments and return random port', function* () {
-    const port = yield detectPort('oooo');
+  it('generator with wrong arguments and return random port', async () => {
+    const port = await detectPort('oooo');
     assert(port > 0);
     assert(typeof port === 'number');
   });
