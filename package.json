@@ -7,13 +7,13 @@
     "port"
   ],
   "bin": {
-    "detect": "./bin/detect-port",
-    "detect-port": "./bin/detect-port"
+    "detect": "./bin/detect-port.js",
+    "detect-port": "./bin/detect-port.js"
   },
   "main": "index.js",
   "files": [
-    "bin",
-    "lib",
+    "bin/**/*.js",
+    "lib/**/*.js",
     "index.js"
   ],
   "repository": {
