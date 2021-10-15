@@ -131,11 +131,11 @@ Most likely network error, check that your `/etc/hosts` and make sure the conten
 
 ## Contributors
 
-|[<img src="https://avatars1.githubusercontent.com/u/1011681?v=4" width="100px;"/><br/><sub><b>xudafeng</b></sub>](https://github.com/xudafeng)<br/>|[<img src="https://avatars0.githubusercontent.com/u/156269?v=4" width="100px;"/><br/><sub><b>fengmk2</b></sub>](https://github.com/fengmk2)<br/>|[<img src="https://avatars1.githubusercontent.com/u/1044425?v=4" width="100px;"/><br/><sub><b>ziczhu</b></sub>](https://github.com/ziczhu)<br/>|[<img src="https://avatars0.githubusercontent.com/u/810438?v=4" width="100px;"/><br/><sub><b>gaearon</b></sub>](https://github.com/gaearon)<br/>|[<img src="https://avatars3.githubusercontent.com/u/34906299?v=4" width="100px;"/><br/><sub><b>chnliquan</b></sub>](https://github.com/chnliquan)<br/>|[<img src="https://avatars1.githubusercontent.com/u/360661?v=4" width="100px;"/><br/><sub><b>popomore</b></sub>](https://github.com/popomore)<br/>|
+|[<img src="https://avatars.githubusercontent.com/u/1011681?v=4" width="100px;"/><br/><sub><b>xudafeng</b></sub>](https://github.com/xudafeng)<br/>|[<img src="https://avatars.githubusercontent.com/u/156269?v=4" width="100px;"/><br/><sub><b>fengmk2</b></sub>](https://github.com/fengmk2)<br/>|[<img src="https://avatars.githubusercontent.com/u/1044425?v=4" width="100px;"/><br/><sub><b>ziczhu</b></sub>](https://github.com/ziczhu)<br/>|[<img src="https://avatars.githubusercontent.com/u/810438?v=4" width="100px;"/><br/><sub><b>gaearon</b></sub>](https://github.com/gaearon)<br/>|[<img src="https://avatars.githubusercontent.com/u/34906299?v=4" width="100px;"/><br/><sub><b>chnliquan</b></sub>](https://github.com/chnliquan)<br/>|[<img src="https://avatars.githubusercontent.com/u/360661?v=4" width="100px;"/><br/><sub><b>popomore</b></sub>](https://github.com/popomore)<br/>|
 | :---: | :---: | :---: | :---: | :---: | :---: |
-[<img src="https://avatars2.githubusercontent.com/u/197375?v=4" width="100px;"/><br/><sub><b>iamyinyue</b></sub>](https://github.com/iamyinyue)<br/>
+[<img src="https://avatars.githubusercontent.com/u/197375?v=4" width="100px;"/><br/><sub><b>antife-yinyue</b></sub>](https://github.com/antife-yinyue)<br/>
 
-This project follows the git-contributor [spec](https://github.com/xudafeng/git-contributor), auto updated at `Tue Jul 30 2019 22:07:39 GMT+0800`.
+This project follows the git-contributor [spec](https://github.com/xudafeng/git-contributor), auto updated at `Fri Oct 15 2021 11:12:15 GMT+0800`.
 
 <!-- GITCONTRIBUTOR_END -->
 
