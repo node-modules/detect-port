@@ -20,14 +20,14 @@
 
 > Node.js implementation of port detector
 
-## Who are using
+## Who are using or has used
 
 - ⭐⭐⭐[eggjs/egg](//github.com/eggjs/egg)
-- ⭐⭐⭐[alibaba/ice](//github.com/alibaba/ice/blob/master/tools/iceworks-app/package.json)
+- ⭐⭐⭐[alibaba/ice](//github.com/alibaba/ice)
 - ⭐⭐⭐[alibaba/uirecorder](//github.com/alibaba/uirecorder)
-- ⭐⭐⭐[facebook/create-react-app](//github.com/facebook/create-react-app/blob/master/packages/react-dev-utils/package.json)
+- ⭐⭐⭐[facebook/create-react-app](//github.com/facebook/create-react-app/blob/main/packages/react-dev-utils/package.json)
 - ⭐⭐⭐[facebook/flipper](//github.com/facebook/flipper)
-- ⭐⭐⭐[umijs/umi](//github.com/umijs/umi/blob/master/packages/af-webpack/package.json)
+- ⭐⭐⭐[umijs/umi](//github.com/umijs/umi)
 - ⭐⭐⭐[gatsbyjs/gatsby](//github.com/gatsbyjs/gatsby)
 - ⭐⭐⭐[electron-react-boilerplate/electron-react-boilerplate](//github.com/electron-react-boilerplate/electron-react-boilerplate)
 - ⭐⭐⭐[zeit/micro](//github.com/zeit/micro)
