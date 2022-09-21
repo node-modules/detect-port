@@ -26,10 +26,10 @@
   },
   "devDependencies": {
     "command-line-test": "1",
-    "egg-bin": "5",
-    "egg-ci": "^1.1.0",
-    "eslint": "^6.1.0",
-    "eslint-config-egg": "^3.1.0",
+    "egg-bin": "^5.2.0",
+    "egg-ci": "^2.1.0",
+    "eslint": "^8.23.1",
+    "eslint-config-egg": "^12.0.0",
     "git-contributor": "1",
     "mm": "^2.1.0",
     "pedding": "^1.1.0",
@@ -42,7 +42,8 @@
     "contributor": "git-contributor"
   },
   "ci": {
-    "version": "16"
+    "os": "linux",
+    "version": "14, 16, 18"
   },
   "homepage": "https://github.com/node-modules/detect-port",
   "license": "MIT"
