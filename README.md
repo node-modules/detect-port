@@ -44,23 +44,6 @@ $ npm i detect-port --save
 
 ```javascript
 const detect = require('detect-port');
-
-/**
- * callback usage
- */
-
-detect(port, (err, _port) => {
-  if (err) {
-    console.log(err);
-  }
-
-  if (port == _port) {
-    console.log(`port: ${port} was not occupied`);
-  } else {
-    console.log(`port: ${port} was occupied, try port: ${_port}`);
-  }
-});
-
 /**
  * use as a promise
  */
