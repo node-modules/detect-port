@@ -1,6 +1,6 @@
 {
   "name": "detect-port",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Node.js implementation of port detector",
   "keywords": [
     "detect",
@@ -12,8 +12,8 @@
   },
   "main": "index.js",
   "files": [
-    "bin/**/*.js",
-    "lib/**/*.js",
+    "bin",
+    "lib",
     "index.js"
   ],
   "repository": {

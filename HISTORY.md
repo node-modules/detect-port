@@ -1,4 +1,23 @@
 
+1.4.0 / 2022-09-21
+==================
+
+**features**
+  * [[`618dec5`](http://github.com/node-modules/detect-port/commit/618dec5661d94535800089f9d941f4896825cb69)] - feat: support wait port (#46) (达峰的夏天 <<xudafeng@126.com>>)
+
+**fixes**
+  * [[`a54e2ef`](http://github.com/node-modules/detect-port/commit/a54e2ef70e388ed4b0c7a4b79ad88bc91e0f8ae3)] - fix: typo on line 54 (#45) (Yavuz Akyuz <<56271907+yavuzakyuz@users.noreply.github.com>>)
+
+**others**
+  * [[`28f07b3`](http://github.com/node-modules/detect-port/commit/28f07b31a7c591cb28b13281246c7f0c64c3dded)] - 🤖 TEST: Run CI on Github Action (#47) (fengmk2 <<fengmk2@gmail.com>>)
+  * [[`ae55c95`](http://github.com/node-modules/detect-port/commit/ae55c956ca36749e22c48b8d1a7d98afec2e6a4d)] - Create codeql-analysis.yml (fengmk2 <<fengmk2@gmail.com>>)
+  * [[`f35409d`](http://github.com/node-modules/detect-port/commit/f35409d53f9298a60e2c6c1560f42ea182025dd4)] - chore: update project config (xudafeng <<xudafeng@126.com>>)
+  * [[`cd21d30`](http://github.com/node-modules/detect-port/commit/cd21d3044db73d1556bf264209c8fd0ee08fa9c4)] - chore: update readme (#43) (XiaoRui <<xiangwu619@gmail.com>>)
+  * [[`da01e68`](http://github.com/node-modules/detect-port/commit/da01e68b43952e06430cc42f873e4253d8cba09e)] - chore: add .editorconfig (#42) (达峰的夏天 <<xudafeng@126.com>>)
+  * [[`a2c6b04`](http://github.com/node-modules/detect-port/commit/a2c6b043954895cba9cbae369e0d79a337c9d73a)] - chore: update repo config (#41) (达峰的夏天 <<xudafeng@126.com>>)
+  * [[`8da6f33`](http://github.com/node-modules/detect-port/commit/8da6f33e10b44cdbcfb9eb5727b0f2117e6929e9)] - chore: update readme (#38) (达峰的夏天 <<xudafeng@126.com>>)
+  * [[`ee88ccb`](http://github.com/node-modules/detect-port/commit/ee88ccb9e2a747dc84a30bcfc1cd4c73b64e3ea5)] - chore: remove unuse file (fengmk2 <<fengmk2@gmail.com>>)
+
 1.3.0 / 2018-11-20
 ==================
 
