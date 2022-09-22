@@ -1,4 +1,10 @@
 
+1.5.1 / 2022-09-23
+==================
+
+**fixes**
+  * [[`9dd9ce3`](http://github.com/node-modules/detect-port/commit/9dd9ce34b560a434ee3a393f6ddea884691f632f)] - fix: add #!/usr/bin/env node header (#49) (达峰的夏天 <<xudafeng@126.com>>)
+
 1.5.0 / 2022-09-21
 ==================
 
