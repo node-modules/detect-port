@@ -27,7 +27,6 @@
   "devDependencies": {
     "command-line-test": "1",
     "egg-bin": "^5.2.0",
-    "egg-ci": "^2.1.0",
     "eslint": "^8.23.1",
     "eslint-config-egg": "^12.0.0",
     "git-contributor": "1",
@@ -40,10 +39,6 @@
     "ci": "npm run lint && egg-bin cov",
     "lint": "eslint .",
     "contributor": "git-contributor"
-  },
-  "ci": {
-    "os": "linux",
-    "version": "14, 16, 18"
   },
   "homepage": "https://github.com/node-modules/detect-port",
   "license": "MIT"
