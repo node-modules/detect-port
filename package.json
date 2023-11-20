@@ -10,7 +10,7 @@
     "detect": "./bin/detect-port.js",
     "detect-port": "./bin/detect-port.js"
   },
-  "main": "index.js",
+  "main": "./dist/commonjs/index.js",
   "files": [
     "bin",
     "lib",
@@ -21,25 +21,52 @@
     "url": "git://github.com/node-modules/detect-port.git"
   },
   "dependencies": {
-    "address": "^1.0.1",
-    "debug": "4"
+    "address": "^2.0.1"
   },
   "devDependencies": {
-    "command-line-test": "1",
-    "egg-bin": "^5.2.0",
-    "eslint": "^8.23.1",
-    "eslint-config-egg": "^12.0.0",
-    "git-contributor": "1",
-    "mm": "^2.1.0",
-    "pedding": "^1.1.0",
-    "power-assert": "^1.6.1"
+    "@eggjs/tsconfig": "^1.3.3",
+    "@types/node": "^20.9.0",
+    "c8": "^8.0.1",
+    "egg-bin": "^6.5.2",
+    "eslint": "^8.52.0",
+    "eslint-config-egg": "^13.0.0",
+    "execa": "^8.0.1",
+    "git-contributor": "^2.1.5",
+    "strip-ansi": "^7.1.0",
+    "ts-node": "^10.9.1",
+    "tshy": "^1.8.0",
+    "tshy-after": "^1.0.0",
+    "tsx": "^4.1.2",
+    "typescript": "^5.2.2"
   },
   "scripts": {
-    "test": "egg-bin test",
-    "ci": "npm run lint && egg-bin cov",
-    "lint": "eslint .",
-    "contributor": "git-contributor"
+    "test": "npm run lint -- --fix && tsx --test test/*.test.ts",
+    "lint": "eslint src test --ext ts",
+    "ci": "npm run lint && npm run cov && npm run prepublishOnly",
+    "contributor": "git-contributor",
+    "prepublishOnly": "npm run tsc && tshy && tshy-after",
+    "tsc": "tsc ./bin/detect-port.ts --resolveJsonModule --esModuleInterop",
+    "cov": "c8 npm test"
   },
   "homepage": "https://github.com/node-modules/detect-port",
-  "license": "MIT"
+  "license": "MIT",
+  "tshy": {
+    "exports": {
+      ".": "./src/index.ts"
+    }
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/commonjs/index.d.ts",
+        "default": "./dist/commonjs/index.js"
+      }
+    }
+  },
+  "types": "./dist/commonjs/index.d.ts",
+  "type": "module"
 }

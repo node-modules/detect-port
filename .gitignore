@@ -2,3 +2,5 @@ node_modules
 coverage
 *.un~
 *.sw*
+.tshy*
+dist/
