@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 
-'use strict';
-
-const pkg = require('../package');
+import pkg from '../package.json';
+import detectPort from '../src/detect-port.js';
 
 const args = process.argv.slice(2);
 let arg_0 = args[0];
 
 if (arg_0 && [ '-v', '--version' ].includes(arg_0.toLowerCase())) {
   console.log(pkg.version);
+
   process.exit(0);
 }
 
@@ -21,18 +21,15 @@ const removeByValue = (arr, val) => {
   }
 };
 
-const main = require('..');
-
 const port = parseInt(arg_0, 10);
 const isVerbose = args.includes('--verbose');
 
 removeByValue(args, '--verbose');
 arg_0 = args[0];
-
 if (!arg_0) {
   const random = Math.floor(9000 + Math.random() * (65535 - 9000));
 
-  main(random, (err, port) => {
+  detectPort(random, (err, port) => {
     if (isVerbose) {
       if (err) {
         console.log(`get available port failed with ${err}`);
@@ -61,7 +58,7 @@ if (!arg_0) {
   console.log(`    ${pkg.homepage}`);
   console.log();
 } else {
-  main(port, (err, _port) => {
+  detectPort(port, (err, _port) => {
     if (isVerbose) {
       if (err) {
         console.log(`get available port failed with ${err}`);
