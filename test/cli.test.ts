@@ -4,10 +4,12 @@ import { fileURLToPath } from 'node:url';
 import { describe, it } from 'node:test';
 import { execaNode } from 'execa';
 import { strict as assert } from 'node:assert';
-import pkg from '../package.json';
+import { readFileSync } from 'node:fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const pkgFile = path.join(__dirname, '../package.json');
+const pkg = JSON.parse(readFileSync(pkgFile, 'utf-8'));
 
 const execaNodeWithLoader = (async (scripPath, args, options) => {
   return execaNode(scripPath, args, {

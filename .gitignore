@@ -4,3 +4,4 @@ coverage
 *.sw*
 .tshy*
 dist/
+package-lock.json

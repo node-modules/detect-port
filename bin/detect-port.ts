@@ -1,7 +1,14 @@
 #!/usr/bin/env node
 
-import pkg from '../package.json';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+import { readFileSync } from 'node:fs';
 import detectPort from '../src/detect-port.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const pkgFile = path.join(__dirname, '../package.json');
+const pkg = JSON.parse(readFileSync(pkgFile, 'utf-8'));
 
 const args = process.argv.slice(2);
 let arg_0 = args[0];
