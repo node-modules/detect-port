@@ -102,7 +102,7 @@ Most likely network error, check that your `/etc/hosts` and make sure the conten
 | :---: | :---: | :---: | :---: | :---: | :---: |
 [<img src="https://avatars.githubusercontent.com/u/52845048?v=4" width="100px;"/><br/><sub><b>snapre</b></sub>](https://github.com/snapre)<br/>|[<img src="https://avatars.githubusercontent.com/u/56271907?v=4" width="100px;"/><br/><sub><b>yavuzakyuz</b></sub>](https://github.com/yavuzakyuz)<br/>|[<img src="https://avatars.githubusercontent.com/u/197375?v=4" width="100px;"/><br/><sub><b>antife-yinyue</b></sub>](https://github.com/antife-yinyue)<br/>
 
-This project follows the git-contributor [spec](https://github.com/xudafeng/git-contributor), auto updated at `Wed Sep 21 2022 23:10:27 GMT+0800`.
+This project follows the git-contributor [spec](https://github.com/xudafeng/git-contributor), auto updated at `Wed May 08 2024 15:54:54 GMT+0800`.
 
 <!-- GITCONTRIBUTOR_END -->
 

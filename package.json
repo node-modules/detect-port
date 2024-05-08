@@ -21,24 +21,25 @@
     "url": "git://github.com/node-modules/detect-port.git"
   },
   "dependencies": {
-    "address": "^1.0.1",
-    "debug": "4"
+    "address": "^2.0.2"
   },
   "devDependencies": {
     "command-line-test": "1",
-    "egg-bin": "^5.2.0",
-    "eslint": "^8.23.1",
-    "eslint-config-egg": "^12.0.0",
-    "git-contributor": "1",
-    "mm": "^2.1.0",
-    "pedding": "^1.1.0",
-    "power-assert": "^1.6.1"
+    "egg-bin": "6",
+    "eslint": "8",
+    "eslint-config-egg": "12",
+    "git-contributor": "2",
+    "mm": "3",
+    "pedding": "1"
   },
   "scripts": {
     "test": "egg-bin test",
     "ci": "npm run lint && egg-bin cov",
     "lint": "eslint .",
     "contributor": "git-contributor"
+  },
+  "engines": {
+    "node": ">= 14.0.0"
   },
   "homepage": "https://github.com/node-modules/detect-port",
   "license": "MIT"
