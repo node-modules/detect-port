@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+'use strict';
+
 const pkg = require('../package');
 
 const args = process.argv.slice(2);

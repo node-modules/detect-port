@@ -1,3 +1,5 @@
+'use strict';
+
 const path = require('path');
 const assert = require('assert');
 const CliTest = require('command-line-test');
