@@ -1,8 +1,5 @@
-'use strict';
-
 const mm = require('mm');
 const net = require('net');
-
 const { waitPort } = require('..');
 
 describe('test/wait-port.test.js', () => {

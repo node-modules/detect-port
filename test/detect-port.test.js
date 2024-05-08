@@ -1,12 +1,9 @@
-'use strict';
-
 const mm = require('mm');
 const dns = require('dns');
 const net = require('net');
 const pedding = require('pedding');
 const address = require('address');
-const assert = require('power-assert');
-
+const assert = require('assert');
 const detectPort = require('..');
 
 describe('test/detect-port.test.js', () => {
