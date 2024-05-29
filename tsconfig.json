@@ -1,8 +1,10 @@
 {
     "extends": "@eggjs/tsconfig",
     "compilerOptions": {
-        "target": "es2022",
-        "module": "nodenext",
-        "moduleResolution": "nodenext"
+      "strict": true,
+      "noImplicitAny": true,
+      "target": "ES2022",
+      "module": "NodeNext",
+      "moduleResolution": "NodeNext"
     }
-}
+  }

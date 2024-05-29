@@ -1,8 +1,6 @@
 import net from 'node:net';
-import { describe, it, after } from 'node:test';
 import { strict as assert } from 'node:assert';
-
-import waitPort from '../src/wait-port.js';
+import { waitPort, detectPort } from '../src/index.js';
 
 describe('test/wait-port.test.js', () => {
   describe('wait for port', () => {
@@ -11,14 +9,15 @@ describe('test/wait-port.test.js', () => {
       servers.forEach(server => server.close());
     });
 
-    it('should be work', (_, done) => {
-      const port = 9090;
+    it('should be work', async () => {
+      const port = await detectPort();
       const server = new net.Server();
       server.listen(port, '0.0.0.0');
       servers.push(server);
       setTimeout(() => {
-        waitPort(port).then().finally(done);
-      });
+        server.close();
+      }, 2000);
+      await waitPort(56888);
     });
 
     it('should be work when retries exceeded', async () => {
@@ -26,7 +25,7 @@ describe('test/wait-port.test.js', () => {
         const port = 9093;
         await waitPort(port, { retries: 3, retryInterval: 100 });
       } catch (err:any) {
-        assert(err.message === 'retries exceeded');
+        assert.equal(err.message, 'retries exceeded');
       }
     });
   });
