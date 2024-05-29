@@ -1,6 +1,9 @@
 {
   "name": "detect-port",
   "version": "1.6.1",
+  "publishConfig": {
+    "tag": "latest-1"
+  },
   "description": "Node.js implementation of port detector",
   "keywords": [
     "detect",
@@ -21,8 +24,7 @@
     "url": "git://github.com/node-modules/detect-port.git"
   },
   "dependencies": {
-    "address": "^1.0.1",
-    "debug": "4"
+    "address": "^1.0.1"
   },
   "devDependencies": {
     "command-line-test": "1",
