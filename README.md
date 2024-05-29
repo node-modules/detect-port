@@ -1,21 +1,18 @@
-[![logo][logo-image]][logo-url]
-
----
+# detect-port
 
 [![NPM version][npm-image]][npm-url]
-[![build status][travis-image]][travis-url]
+[![CI](https://github.com/node-modules/detect-port/actions/workflows/nodejs.yml/badge.svg)](https://github.com/node-modules/detect-port/actions/workflows/nodejs.yml)
 [![Test coverage][codecov-image]][codecov-url]
+[![Known Vulnerabilities][snyk-image]][snyk-url]
 [![npm download][download-image]][download-url]
 
-[logo-image]: ./logo.png
-[logo-url]: https://npmjs.org/package/detect-port
-[npm-image]: https://img.shields.io/npm/v/detect-port.svg
+[npm-image]: https://img.shields.io/npm/v/detect-port.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/detect-port
-[travis-image]: https://img.shields.io/travis/node-modules/detect-port.svg
-[travis-url]: https://travis-ci.org/node-modules/detect-port
-[codecov-image]: https://img.shields.io/coveralls/node-modules/detect-port.svg
+[codecov-image]: https://codecov.io/gh/node-modules/detect-port/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/node-modules/detect-port
-[download-image]: https://img.shields.io/npm/dm/detect-port.svg
+[snyk-image]: https://snyk.io/test/npm/detect-port/badge.svg?style=flat-square
+[snyk-url]: https://snyk.io/test/npm/detect-port
+[download-image]: https://img.shields.io/npm/dm/detect-port.svg?style=flat-square
 [download-url]: https://npmjs.org/package/detect-port
 
 > Node.js implementation of port detector
@@ -39,7 +36,7 @@
 ## Usage
 
 ```bash
-$ npm i detect-port --save
+npm i detect-port
 ```
 
 ```javascript
@@ -65,7 +62,7 @@ detect(port)
 ## Command Line Tool
 
 ```bash
-$ npm i detect-port -g
+npm i detect-port -g
 ```
 
 ### Quick Start
@@ -88,7 +85,7 @@ $ detect --help
 
 Most likely network error, check that your `/etc/hosts` and make sure the content below:
 
-```
+```bash
 127.0.0.1       localhost
 255.255.255.255 broadcasthost
 ::1             localhost
