@@ -1,6 +1,6 @@
 {
   "name": "detect-port",
-  "version": "1.6.1",
+  "version": "2.0.0",
   "description": "Node.js implementation of port detector",
   "keywords": [
     "detect",

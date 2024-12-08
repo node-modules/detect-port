@@ -1,5 +1,48 @@
 # Changelog
 
+## [2.0.0](https://github.com/node-modules/detect-port/compare/v1.6.1...v2.0.0) (2024-12-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* Drop Node.js < 16 support
+
+1. 使用 ts 重构
+2. 使用 tshy 支持 esm 和 cjs
+3. test 使用 test-runner (这里需要 node v18 版本)
+
+merge from https://github.com/node-modules/detect-port/pull/51
+
+<!-- This is an auto-generated comment: release notes by coderabbit.ai
+-->
+## Summary by CodeRabbit
+
+- **New Features**
+- Introduced a new `waitPort` function to asynchronously wait for a
+specified port to become available.
+	- Added a new ESLint configuration to enforce TypeScript linting rules.
+
+- **Bug Fixes**
+	- Reverted a feature in the `detect-port` package due to issues raised.
+
+- **Documentation**
+	- Updated `README.md` for improved clarity and updated badge links.
+	- Modified `CONTRIBUTING.md` to reflect changes in testing commands.
+
+- **Chores**
+	- Introduced a new TypeScript configuration file (`tsconfig.json`).
+- Updated `package.json` to reflect changes in dependencies and project
+structure.
+
+- **Tests**
+- Added comprehensive tests for the new `waitPort` and updated tests for
+the CLI and `detectPort` function.
+<!-- end of auto-generated comment: release notes by coderabbit.ai -->
+
+### Features
+
+* refactor with typescript to support esm and cjs both ([#56](https://github.com/node-modules/detect-port/issues/56)) ([b5d32d2](https://github.com/node-modules/detect-port/commit/b5d32d2422bd753a87ff2e995514ac41f1c85346))
+
 ## [1.6.1](https://github.com/node-modules/detect-port/compare/v1.6.0...v1.6.1) (2024-05-08)
 
 
