@@ -19,6 +19,7 @@ jobs:
       - run: npm install
       - run: npm run prepublishOnly
       - run: node -v
+      - run: . /home/runner/mynvm/nvm.sh
       - run: nvm install 14 && nvm use 14
       - run: node -v
       - run: node dist/commonjs/bin/detect-port.js
