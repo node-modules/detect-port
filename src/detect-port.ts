@@ -62,7 +62,7 @@ function tryListen(port: number, maxPort: number, hostname: string | undefined, 
     listen(port, hostname, (err, realPort) => {
       if (err) {
         if ((err as any).code === 'EADDRNOTAVAIL') {
-          return callback(new Error('the ip that is not unknown on the machine'));
+          return callback(new Error('The IP address is not available on this machine'));
         }
         return handleError();
       }

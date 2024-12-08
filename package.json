@@ -8,7 +8,7 @@
   ],
   "bin": {
     "detect": "dist/commonjs/bin/detect-port.js",
-    "detect-port": "dist/commonjs//detect-port.js"
+    "detect-port": "dist/commonjs/bin/detect-port.js"
   },
   "main": "./dist/commonjs/index.js",
   "files": [
