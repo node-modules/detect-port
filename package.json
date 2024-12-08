@@ -7,8 +7,8 @@
     "port"
   ],
   "bin": {
-    "detect": "bin/detect-port.cjs",
-    "detect-port": "bin/detect-port.cjs"
+    "detect": "dist/commonjs/bin/detect-port.js",
+    "detect-port": "dist/commonjs//detect-port.js"
   },
   "main": "./dist/commonjs/index.js",
   "files": [
@@ -37,10 +37,12 @@
     "typescript": "^5.2.2"
   },
   "scripts": {
-    "test": "npm run lint -- --fix && egg-bin test",
+    "pretest": "npm run lint -- --fix && npm run prepublishOnly",
+    "test": "egg-bin test",
     "lint": "eslint src test --ext ts",
     "ci": "npm run lint && npm run cov && npm run prepublishOnly",
     "prepublishOnly": "tshy && tshy-after",
+    "precov": "npm run prepublishOnly",
     "cov": "egg-bin cov"
   },
   "engines": {

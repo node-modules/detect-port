@@ -101,18 +101,17 @@ describe('test/detect-port.test.ts', () => {
       assert.equal(realPort, 24001);
     });
 
-    it('work with listening next port 24001 because 24000 was listened to ' + ip(), async () => {
+    it('work with listening next port 24001 because 24000 was listened', async () => {
       const port = 24000;
       const realPort = await detectPort(port);
-
-      assert(realPort === 24001);
+      assert.equal(realPort, 24001);
     });
 
     it('work with listening next port 28081 because 28080 was listened to 0.0.0.0:28080', async () => {
       const port = 28080;
       const realPort = await detectPort(port);
 
-      assert(realPort === 28081);
+      assert.equal(realPort, 28081);
     });
 
     it('work with listening random port when try port hit maxPort', async () => {

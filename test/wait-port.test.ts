@@ -26,7 +26,7 @@ describe('test/wait-port.test.ts', () => {
       try {
         const port = 9093;
         await waitPort(port, { retries: 3, retryInterval: 100 });
-      } catch (err:any) {
+      } catch (err: any) {
         assert.equal(err.message, 'retries exceeded');
       }
     });

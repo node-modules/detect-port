@@ -10,8 +10,8 @@ const __dirname = path.dirname(__filename);
 const pkgFile = path.join(__dirname, '../package.json');
 const pkg = JSON.parse(readFileSync(pkgFile, 'utf-8'));
 
-describe.skip('test/cli.test.ts', async () => {
-  const binFile = path.join(__dirname, '../bin/detect-port.cjs');
+describe('test/cli.test.ts', async () => {
+  const binFile = path.join(__dirname, '../dist/commonjs/bin/detect-port.js');
 
   it('should show version', async () => {
     let res = await execaNode(binFile, [ '-v' ]);

@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-const path = require('node:path');
-const { readFileSync } = require('node:fs');
-const { detectPort } = require('../');
+import path from 'node:path';
+import { readFileSync } from 'node:fs';
+import detectPort from '../detect-port.js';
 
-const pkgFile = path.join(__dirname, '../package.json');
+const pkgFile = path.join(__dirname, '../../../package.json');
 const pkg = JSON.parse(readFileSync(pkgFile, 'utf-8'));
 
 const args = process.argv.slice(2);
@@ -12,11 +12,10 @@ let arg_0 = args[0];
 
 if (arg_0 && [ '-v', '--version' ].includes(arg_0.toLowerCase())) {
   console.log(pkg.version);
-
   process.exit(0);
 }
 
-const removeByValue = (arr, val) => {
+const removeByValue = (arr: string[], val: string) => {
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] === val) {
       arr.splice(i, 1);
