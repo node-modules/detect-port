@@ -1,8 +1,13 @@
 import { debuglog } from 'node:util';
-import { setTimeout as sleep } from 'node:timers/promises';
 import detectPort from './detect-port.js';
 
 const debug = debuglog('detect-port:wait-port');
+
+function sleep(ms: number) {
+  return new Promise(resolve => {
+    setTimeout(resolve, ms);
+  });
+}
 
 export class WaitPortRetryError extends Error {
   retries: number;
