@@ -1,10 +1,10 @@
-import net from 'node:net';
-import { ip } from 'address';
+import { createServer, AddressInfo } from 'node:net';
 import { debuglog } from 'node:util';
+import { ip } from 'address';
 
 const debug = debuglog('detect-port');
 
-type DetectPortCallback = (err: Error | null, port: number) => void;
+type DetectPortCallback = (err: Error | null, port?: number) => void;
 
 interface PortConfig {
   port?: number | string;
@@ -46,7 +46,7 @@ export default function detectPort(port?: number | string | PortConfig | DetectP
   });
 }
 
-function tryListen(port: number, maxPort: number, hostname: string | undefined, callback: (...args: any[]) => void) {
+function tryListen(port: number, maxPort: number, hostname: string | undefined, callback: DetectPortCallback) {
   function handleError() {
     port++;
     if (port >= maxPort) {
@@ -109,10 +109,10 @@ function tryListen(port: number, maxPort: number, hostname: string | undefined, 
   }
 }
 
-function listen(port: number, hostname: string | undefined, callback: (...args: any[]) => void) {
-  const server = new net.Server();
+function listen(port: number, hostname: string | undefined, callback: DetectPortCallback) {
+  const server = createServer();
 
-  server.on('error', err => {
+  server.once('error', err => {
     debug('listen %s:%s error: %s', hostname, port, err);
     server.close();
 
@@ -124,10 +124,11 @@ function listen(port: number, hostname: string | undefined, callback: (...args: 
     return callback(err);
   });
 
+  debug('try listen %d on %s', port, hostname);
   server.listen(port, hostname, () => {
-    port = (server.address() as net.AddressInfo).port;
-    server.close();
+    port = (server.address() as AddressInfo).port;
     debug('get free %s:%s', hostname, port);
+    server.close();
     return callback(null, port);
   });
 }

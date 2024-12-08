@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 const pkgFile = path.join(__dirname, '../package.json');
 const pkg = JSON.parse(readFileSync(pkgFile, 'utf-8'));
 
-describe.skip('test/cli.test.js', async () => {
+describe.skip('test/cli.test.ts', async () => {
   const binFile = path.join(__dirname, '../bin/detect-port.cjs');
 
   it('should show version', async () => {

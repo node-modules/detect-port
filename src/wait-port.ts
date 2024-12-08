@@ -1,7 +1,7 @@
 import { debuglog } from 'node:util';
 import detectPort from './detect-port.js';
 
-const debug = debuglog('wait-port');
+const debug = debuglog('detect-port:wait-port');
 
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -15,7 +15,7 @@ export default async function waitPort(port: number, options: WaitPortOptions = 
   let count = 1;
 
   async function loop() {
-    debug('retries', retries, 'count', count);
+    debug('wait port %d, retries %d, count %d', port, retries, count);
     if (count > retries) {
       const err = new Error('retries exceeded');
       (err as any).retries = retries;

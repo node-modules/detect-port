@@ -1,17 +1,19 @@
 import dns from 'node:dns';
 import net from 'node:net';
 import { strict as assert } from 'node:assert';
-import { mock, describe, it, before, after } from 'node:test';
 import { ip } from 'address';
+import mm from 'mm';
 
 import detectPort from '../src/detect-port.js';
 
-describe('test/detect-port.test.js', () => {
+describe('test/detect-port.test.ts', () => {
+  afterEach(mm.restore);
+
   describe('detect port test', () => {
     const servers: net.Server[] = [];
-    before((_, done) => {
+    before(done => {
       let count = 0;
-      const cb = mock.fn((err?: Error) => {
+      const cb = (err?: Error) => {
         if (err) {
           done(err);
         }
@@ -19,23 +21,23 @@ describe('test/detect-port.test.js', () => {
         if (count === 13) {
           done();
         }
-      });
+      };
       const server = new net.Server();
-      server.listen(3000, 'localhost', cb);
+      server.listen(23000, 'localhost', cb);
       server.on('error', err => {
         console.error('listen localhost error:', err);
       });
       servers.push(server);
 
       const server2 = new net.Server();
-      server2.listen(4000, ip(), cb);
+      server2.listen(24000, ip(), cb);
       servers.push(server2);
 
       const server3 = new net.Server();
-      server3.listen(8080, '0.0.0.0', cb);
+      server3.listen(28080, '0.0.0.0', cb);
       servers.push(server3);
 
-      for (let port = 7000; port < 7010; port++) {
+      for (let port = 27000; port < 27010; port++) {
         const server = new net.Server();
         if (port % 3 === 0) {
           server.listen(port, cb);
@@ -47,17 +49,17 @@ describe('test/detect-port.test.js', () => {
         servers.push(server);
       }
     });
+
     after(() => {
       servers.forEach(server => server.close());
-      mock.reset();
     });
 
-    it('get random port with callback', (_, done) => {
+    it('get random port with callback', done => {
       detectPort((_, port) => {
+        assert(port);
         assert(port >= 1024 && port < 65535);
         done();
       });
-
     });
 
     it('get random port with promise', async () => {
@@ -66,87 +68,87 @@ describe('test/detect-port.test.js', () => {
       assert(port >= 1024 && port < 65535);
     });
 
-    it('with occupied port', async () => {
+    it('with occupied port, like "listen EACCES: permission denied"', async () => {
       const port = 80;
       const realPort = await detectPort(port);
-
       assert(realPort >= port && realPort < 65535);
     });
 
-    it('work with listening next port 3001 because 3000 was listened to localhost', async () => {
-      const port = 3000;
+    it('work with listening next port 23001 because 23000 was listened to localhost', async () => {
+      const port = 23000;
       const realPort = await detectPort(port);
-
-      assert(realPort === 3001);
+      assert(realPort);
+      assert.equal(realPort, 23001);
     });
 
-    it('should listen next port 4001 when localhost is not binding', async t => {
-      t.mock.method(dns, 'lookup', (address: string, callback: (...args: any[]) => void) => {
+    it('should listen next port 24001 when localhost is not binding', async () => {
+      mm(dns, 'lookup', (...args: any[]) => {
+        mm.restore();
+        const address = args[0] as string;
         if (address !== 'localhost') {
-          return dns.lookup(address, callback);
+          return dns.lookup(args[0], args[1], args[2]);
         }
         process.nextTick(() => {
           const err = new Error(`getaddrinfo ENOTFOUND ${address}`);
           (err as any).code = 'ENOTFOUND';
+          const callback = args[-1];
           callback(err);
         });
-      }, { times: 1 });
+      });
 
-      const port = 4000;
+      const port = 24000;
       const realPort = await detectPort(port);
-
-      assert(realPort === 4001);
-
-      t.mock.reset();
+      assert.equal(realPort, 24001);
     });
 
-    it('work with listening next port 4001 because 4000 was listened to ' + ip(), async () => {
-      const port = 4000;
+    it('work with listening next port 24001 because 24000 was listened to ' + ip(), async () => {
+      const port = 24000;
       const realPort = await detectPort(port);
 
-      assert(realPort === 4001);
+      assert(realPort === 24001);
     });
 
-    it('work with listening next port 8081 because 8080 was listened to 0.0.0.0:8080', async () => {
-      const port = 8080;
+    it('work with listening next port 28081 because 28080 was listened to 0.0.0.0:28080', async () => {
+      const port = 28080;
       const realPort = await detectPort(port);
 
-      assert(realPort === 8081);
+      assert(realPort === 28081);
     });
 
     it('work with listening random port when try port hit maxPort', async () => {
-      const port = 7000;
+      const port = 27000;
       const realPort = await detectPort(port);
-      assert(realPort < 7000 || realPort > 7009);
+      assert(realPort < 27000 || realPort > 27009);
     });
 
-    it('work with sending object with hostname', (_, done) => {
-      const port = 7000;
+    it('work with sending object with hostname', done => {
+      const port = 27000;
       const hostname = '127.0.0.1';
       detectPort({
         port,
         hostname,
         callback: (_, realPort) => {
-          assert(realPort >= 7000 && realPort < 65535);
+          assert(realPort);
+          assert(realPort >= 27000 && realPort < 65535);
           done();
         },
       });
     });
 
     it('promise with sending object with hostname', async () => {
-      const port = 7000;
+      const port = 27000;
       const hostname = '127.0.0.1';
       const realPort = await detectPort({
         port,
         hostname,
       });
-      assert(realPort >= 7000 && realPort < 65535);
+      assert(realPort >= 27000 && realPort < 65535);
     });
 
     it('with string arg', async () => {
-      const port = '8080';
+      const port = '28080';
       const realPort = await detectPort(port);
-      assert(realPort >= 8080 && realPort < 65535);
+      assert(realPort >= 28080 && realPort < 65535);
     });
 
     it('with wrong arguments', async () => {
@@ -154,14 +156,14 @@ describe('test/detect-port.test.js', () => {
       assert(port && port > 0);
     });
 
-    it('generator usage', async () => {
-      const port = 8080;
+    it('async/await usage', async () => {
+      const port = 28080;
       const realPort = await detectPort(port);
       assert(realPort >= port && realPort < 65535);
     });
 
-    it('promise usage', (_, done) => {
-      const _port = 8080;
+    it('promise usage', done => {
+      const _port = 28080;
       detectPort(_port)
         .then(port => {
           assert(port >= _port && port < 65535);
@@ -170,7 +172,7 @@ describe('test/detect-port.test.js', () => {
         .catch(done);
     });
 
-    it('promise with wrong arguments', (_, done) => {
+    it('promise with wrong arguments', done => {
       detectPort()
         .then(port => {
           assert(port > 0);

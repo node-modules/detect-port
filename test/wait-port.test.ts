@@ -1,23 +1,25 @@
-import net from 'node:net';
+import { once } from 'node:events';
+import { createServer, Server } from 'node:net';
 import { strict as assert } from 'node:assert';
 import { waitPort, detectPort } from '../src/index.js';
 
-describe('test/wait-port.test.js', () => {
+describe('test/wait-port.test.ts', () => {
   describe('wait for port', () => {
-    const servers: net.Server[] = [];
+    const servers: Server[] = [];
     after(() => {
       servers.forEach(server => server.close());
     });
 
     it('should be work', async () => {
       const port = await detectPort();
-      const server = new net.Server();
-      server.listen(port, '0.0.0.0');
+      const server = createServer();
       servers.push(server);
+      server.listen(port, '0.0.0.0');
+      await once(server, 'listening');
       setTimeout(() => {
         server.close();
       }, 2000);
-      await waitPort(56888);
+      await waitPort(port);
     });
 
     it('should be work when retries exceeded', async () => {
