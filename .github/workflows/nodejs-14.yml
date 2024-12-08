@@ -1,0 +1,24 @@
+name: Node.js 14 CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: irby/setup-node-nvm@master
+        with:
+          node-version: '16.x'
+      - run: npm install
+      - run: npm run prepublishOnly
+      - run: node -v
+      - run: nvm install 14 && nvm use 14
+      - run: node -v
+      - run: node dist/commonjs/bin/detect-port.js
