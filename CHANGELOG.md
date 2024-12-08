@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/node-modules/detect-port/compare/v2.0.0...v2.0.1) (2024-12-08)
+
+
+### Bug Fixes
+
+* use setTimeout Promise ([#58](https://github.com/node-modules/detect-port/issues/58)) ([db3ce1b](https://github.com/node-modules/detect-port/commit/db3ce1bd7c29bb5e6fcb60de1bccec0ef61d306f))
+
 ## [2.0.0](https://github.com/node-modules/detect-port/compare/v1.6.1...v2.0.0) (2024-12-08)
 
 
