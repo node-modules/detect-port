@@ -3,9 +3,8 @@ import net from 'node:net';
 import { strict as assert } from 'node:assert';
 import { ip } from 'address';
 import mm from 'mm';
-import { detectPort } from '../src/detect-port.js';
 import detect from '../src/index.js';
-import { detect as detect2 } from '../src/index.js';
+import { detect as detect2, detectPort } from '../src/index.js';
 
 describe('test/detect-port.test.ts', () => {
   afterEach(mm.restore);
