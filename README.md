@@ -42,24 +42,40 @@
 npm i detect-port
 ```
 
+CommonJS
+
 ```javascript
-const detect = require('detect-port');
-/**
- * use as a promise
- */
+const { detect } = require('detect-port');
 
 detect(port)
-  .then(_port => {
-    if (port == _port) {
+  .then(realPort => {
+    if (port == realPort) {
       console.log(`port: ${port} was not occupied`);
     } else {
-      console.log(`port: ${port} was occupied, try port: ${_port}`);
+      console.log(`port: ${port} was occupied, try port: ${realPort}`);
     }
   })
   .catch(err => {
     console.log(err);
   });
+```
 
+ESM and TypeScript
+
+```ts
+import { detect } from 'detect-port';
+
+detect(port)
+  .then(realPort => {
+    if (port == realPort) {
+      console.log(`port: ${port} was not occupied`);
+    } else {
+      console.log(`port: ${port} was occupied, try port: ${realPort}`);
+    }
+  })
+  .catch(err => {
+    console.log(err);
+  });
 ```
 
 ## Command Line Tool

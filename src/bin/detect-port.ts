@@ -2,7 +2,7 @@
 
 import path from 'node:path';
 import { readFileSync } from 'node:fs';
-import detectPort from '../detect-port.js';
+import { detectPort } from '../detect-port.js';
 
 const pkgFile = path.join(__dirname, '../../../package.json');
 const pkg = JSON.parse(readFileSync(pkgFile, 'utf-8'));

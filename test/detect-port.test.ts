@@ -3,8 +3,8 @@ import net from 'node:net';
 import { strict as assert } from 'node:assert';
 import { ip } from 'address';
 import mm from 'mm';
-
-import detectPort from '../src/detect-port.js';
+import detect from '../src/index.js';
+import { detect as detect2, detectPort } from '../src/index.js';
 
 describe('test/detect-port.test.ts', () => {
   afterEach(mm.restore);
@@ -37,6 +37,13 @@ describe('test/detect-port.test.ts', () => {
       server3.listen(28080, '0.0.0.0', cb);
       servers.push(server3);
 
+      const server4 = new net.Server();
+      server4.listen(25000, '127.0.0.1', cb);
+      server4.on('error', err => {
+        console.error('listen 127.0.0.1 error:', err);
+      });
+      servers.push(server4);
+
       for (let port = 27000; port < 27010; port++) {
         const server = new net.Server();
         if (port % 3 === 0) {
@@ -68,6 +75,13 @@ describe('test/detect-port.test.ts', () => {
       assert(port >= 1024 && port < 65535);
     });
 
+    it('should detect work', async () => {
+      let port = await detect();
+      assert(port >= 1024 && port < 65535);
+      port = await detect2();
+      assert(port >= 1024 && port < 65535);
+    });
+
     it('with occupied port, like "listen EACCES: permission denied"', async () => {
       const port = 80;
       const realPort = await detectPort(port);
@@ -79,6 +93,13 @@ describe('test/detect-port.test.ts', () => {
       const realPort = await detectPort(port);
       assert(realPort);
       assert.equal(realPort, 23001);
+    });
+
+    it('work with listening next port 25001 because 25000 was listened to 127.0.0.1', async () => {
+      const port = 25000;
+      const realPort = await detectPort(port);
+      assert(realPort);
+      assert.equal(realPort, 25001);
     });
 
     it('should listen next port 24001 when localhost is not binding', async () => {

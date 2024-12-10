@@ -1,6 +1,9 @@
-import detectPort from './detect-port.js';
+import { detectPort } from './detect-port.js';
 
 export default detectPort;
 
-export { detectPort };
+export * from './detect-port.js';
+// keep alias detectPort to detect
+export const detect = detectPort;
+
 export * from './wait-port.js';

@@ -1,5 +1,5 @@
 import { debuglog } from 'node:util';
-import detectPort from './detect-port.js';
+import { detectPort } from './detect-port.js';
 
 const debug = debuglog('detect-port:wait-port');
 
