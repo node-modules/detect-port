@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/node-modules/detect-port/compare/v2.0.1...v2.1.0) (2024-12-10)
+
+
+### Features
+
+* refactor with async/await instead of callback ([#59](https://github.com/node-modules/detect-port/issues/59)) ([9254c18](https://github.com/node-modules/detect-port/commit/9254c18015498bea3617a609c13b8514b440c821))
+
 ## [2.0.1](https://github.com/node-modules/detect-port/compare/v2.0.0...v2.0.1) (2024-12-08)
 
 
