@@ -44,6 +44,13 @@ describe('test/detect-port.test.ts', () => {
       });
       servers.push(server4);
 
+      const server5 = new net.Server();
+      server5.listen(25500, '::1', cb);
+      server5.on('error', err => {
+        console.error('listen ::1 error:', err);
+      });
+      servers.push(server5);
+
       for (let port = 27000; port < 27010; port++) {
         const server = new net.Server();
         if (port % 3 === 0) {
@@ -100,6 +107,13 @@ describe('test/detect-port.test.ts', () => {
       const realPort = await detectPort(port);
       assert(realPort);
       assert.equal(realPort, 25001);
+    });
+
+    it('work with listening next port 25501 because 25500 was listened to ::1', async () => {
+      const port = 25500;
+      const realPort = await detectPort(port);
+      assert(realPort);
+      assert.equal(realPort, 25501);
     });
 
     it('should listen next port 24001 when localhost is not binding', async () => {
