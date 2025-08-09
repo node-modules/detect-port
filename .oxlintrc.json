@@ -1,0 +1,36 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "env": {
+    "node": true,
+    "mocha": true
+  },
+  "extends": [
+    "./node_modules/@eggjs/oxlint-config/.oxlintrc.json"
+  ],
+  "rules": {
+    "promise/prefer-await-to-callbacks": "allow",
+    "promise/prefer-await-to-then": "allow",
+    "promise/avoid-new": "allow",
+    "promise/no-callback-in-promise": "allow",
+    "unicorn/numeric-separators-style": "allow",
+    "unicorn/escape-case": "allow",
+    "unicorn/consistent-assert": "allow",
+    "unicorn/no-array-for-each": "allow",
+    "unicorn/prefer-number-properties": "allow",
+    "unicorn/text-encoding-identifier-case": "allow",
+    "unicorn/prefer-optional-catch-binding": "allow",
+    "no-lonely-if": "allow",
+    "no-unused-vars": "allow",
+    "no-void": "allow",
+    "import/no-named-as-default": "allow",
+    "typescript/no-explicit-any": "allow"
+  },
+  "ignorePatterns": [
+    "test/fixtures",
+    "test/demo",
+    "logs",
+    "run",
+    "coverage",
+    "dist"
+  ]
+}
