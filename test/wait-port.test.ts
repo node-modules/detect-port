@@ -1,5 +1,5 @@
 import { once } from 'node:events';
-import { createServer, Server } from 'node:net';
+import { createServer, type Server } from 'node:net';
 import { strict as assert } from 'node:assert';
 import { waitPort, detectPort, WaitPortRetryError } from '../src/index.js';
 

@@ -1,4 +1,4 @@
-import { createServer, AddressInfo } from 'node:net';
+import { createServer, type AddressInfo } from 'node:net';
 import { debuglog } from 'node:util';
 import { ip } from 'address';
 
