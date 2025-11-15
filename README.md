@@ -7,15 +7,15 @@
 [![npm download][download-image]][download-url]
 [![Node.js Version][node-version-image]][node-version-url]
 
-[npm-image]: https://img.shields.io/npm/v/detect-port.svg?style=flat-square
+[npm-image]: https://img.shields.io/npm/v/detect-port.svg
 [npm-url]: https://npmjs.org/package/detect-port
 [codecov-image]: https://codecov.io/gh/node-modules/detect-port/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/node-modules/detect-port
-[snyk-image]: https://snyk.io/test/npm/detect-port/badge.svg?style=flat-square
+[snyk-image]: https://snyk.io/test/npm/detect-port/badge.svg
 [snyk-url]: https://snyk.io/test/npm/detect-port
-[download-image]: https://img.shields.io/npm/dm/detect-port.svg?style=flat-square
+[download-image]: https://img.shields.io/npm/dm/detect-port.svg
 [download-url]: https://npmjs.org/package/detect-port
-[node-version-image]: https://img.shields.io/node/v/detect-port.svg?style=flat-square
+[node-version-image]: https://img.shields.io/node/v/detect-port.svg
 [node-version-url]: https://nodejs.org/en/download/
 
 > Node.js implementation of port detector
