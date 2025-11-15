@@ -21,7 +21,7 @@ describe('test/cli-enhanced.test.ts - Enhanced CLI coverage', () => {
     try {
       readFileSync(binFile);
     } catch (err) {
-      throw new Error('Binary file not found. Run npm run prepublishOnly first.');
+      throw new Error('Binary file not found. Run npm run prepublishOnly first.', { cause: err });
     }
   });
 
