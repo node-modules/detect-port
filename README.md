@@ -8,13 +8,13 @@
 [![Node.js Version][node-version-image]][node-version-url]
 
 [npm-image]: https://img.shields.io/npm/v/detect-port.svg
-[npm-url]: https://npmjs.org/package/detect-port
+[npm-url]: https://npmx.dev/package/detect-port
 [codecov-image]: https://codecov.io/gh/node-modules/detect-port/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/node-modules/detect-port
 [snyk-image]: https://snyk.io/test/npm/detect-port/badge.svg
 [snyk-url]: https://snyk.io/test/npm/detect-port
 [download-image]: https://img.shields.io/npm/dm/detect-port.svg
-[download-url]: https://npmjs.org/package/detect-port
+[download-url]: https://npmx.dev/package/detect-port
 [node-version-image]: https://img.shields.io/node/v/detect-port.svg
 [node-version-url]: https://nodejs.org/en/download/
 
