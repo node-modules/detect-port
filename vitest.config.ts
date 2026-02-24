@@ -18,13 +18,14 @@ export default defineConfig({
       include: ['src/**/*.ts'],
       exclude: [
         'src/**/*.d.ts',
-        'src/bin/**', // CLI is tested but coverage not tracked via vitest
+        // CLI is tested but coverage not tracked via vitest
+        'src/bin/**',
       ],
       all: true,
       // Coverage thresholds
       // Note: Some edge case error handling paths (6 lines) in detect-port.ts are
-      // difficult to test without extensive mocking as they require specific
-      // system conditions (DNS failures, port 0 failures, specific binding errors)
+      // Difficult to test without extensive mocking as they require specific
+      // System conditions (DNS failures, port 0 failures, specific binding errors)
       thresholds: {
         lines: 93,
         functions: 100,

@@ -24,7 +24,7 @@ const removeByValue = (arr: string[], val: string) => {
   }
 };
 
-const port = parseInt(arg_0, 10);
+const requestedPort = parseInt(arg_0, 10);
 const isVerbose = args.includes('--verbose');
 
 removeByValue(args, '--verbose');
@@ -32,17 +32,17 @@ arg_0 = args[0];
 if (!arg_0) {
   const random = Math.floor(9000 + Math.random() * (65535 - 9000));
 
-  detectPort(random, (err, port) => {
+  detectPort(random, (err, detectedPort) => {
     if (isVerbose) {
       if (err) {
         console.log(`get available port failed with ${err}`);
       }
-      console.log(`get available port ${port} randomly`);
+      console.log(`get available port ${detectedPort} randomly`);
     } else {
-      console.log(port || random);
+      console.log(detectedPort || random);
     }
   });
-} else if (isNaN(port)) {
+} else if (isNaN(requestedPort)) {
   console.log();
   console.log(`  \u001b[37m${pkg.description}\u001b[0m`);
   console.log();
@@ -61,19 +61,19 @@ if (!arg_0) {
   console.log(`    ${pkg.homepage}`);
   console.log();
 } else {
-  detectPort(port, (err, _port) => {
+  detectPort(requestedPort, (err, _port) => {
     if (isVerbose) {
       if (err) {
         console.log(`get available port failed with ${err}`);
       }
 
-      if (port !== _port) {
-        console.log(`port ${port} was occupied`);
+      if (requestedPort !== _port) {
+        console.log(`port ${requestedPort} was occupied`);
       }
 
       console.log(`get available port ${_port}`);
     } else {
-      console.log(_port || port);
+      console.log(_port || requestedPort);
     }
   });
 }
