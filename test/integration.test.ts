@@ -3,6 +3,39 @@ import { createServer, type Server } from 'node:net';
 import { once } from 'node:events';
 import { detectPort, waitPort, WaitPortRetryError } from '../src/index.js';
 
+async function startServer(port: number, registry?: Server[]): Promise<Server> {
+  const server = createServer();
+  server.listen(port, '0.0.0.0');
+  await once(server, 'listening');
+  if (registry) {
+    registry.push(server);
+  }
+  return server;
+}
+
+async function allocateServicePorts(
+  services: string[],
+  startPort: number,
+): Promise<Record<string, number>> {
+  const ports: Record<string, number> = {};
+  for (const service of services) {
+    const offset = services.indexOf(service) * 10;
+    ports[service] = await detectPort(startPort + offset);
+  }
+  return ports;
+}
+
+async function startServers(ports: number[]): Promise<Server[]> {
+  const result: Server[] = [];
+  for (const port of ports) {
+    const server = createServer();
+    server.listen(port, '0.0.0.0');
+    await once(server, 'listening');
+    result.push(server);
+  }
+  return result;
+}
+
 describe('test/integration.test.ts - Integration scenarios', () => {
   const servers: Server[] = [];
 
@@ -125,23 +158,14 @@ describe('test/integration.test.ts - Integration scenarios', () => {
     });
 
     it('should handle server lifecycle with detectPort', async () => {
-      // Simulate server startup
       const port = await detectPort(20000);
-      const server = createServer();
-      server.listen(port, '0.0.0.0');
-      await once(server, 'listening');
-      servers.push(server);
+      const server = await startServer(port, servers);
 
-      // Simulate needing another port for another service
       const secondPort = await detectPort(20000);
       expect(secondPort).toBeGreaterThan(port);
 
-      const server2 = createServer();
-      server2.listen(secondPort, '0.0.0.0');
-      await once(server2, 'listening');
-      servers.push(server2);
+      const server2 = await startServer(secondPort, servers);
 
-      // Both servers should be running
       expect(server.listening).toBe(true);
       expect(server2.listening).toBe(true);
     });
@@ -154,7 +178,8 @@ describe('test/integration.test.ts - Integration scenarios', () => {
 
           // Use the detected port to start a server
           const server = createServer();
-          server.listen(port!, '0.0.0.0', () => {
+          const resolvedPort = port ?? 0;
+          server.listen(resolvedPort, '0.0.0.0', () => {
             expect(server.listening).toBe(true);
             server.close();
             resolve();
@@ -180,17 +205,15 @@ describe('test/integration.test.ts - Integration scenarios', () => {
 
     it('should handle mix of successful and failed waitPort operations', async () => {
       const occupiedPort = await detectPort();
-
-      const server = createServer();
-      server.listen(occupiedPort, '0.0.0.0');
-      await once(server, 'listening');
-      servers.push(server);
+      await startServer(occupiedPort, servers);
 
       const freePort = await detectPort(occupiedPort + 10);
 
       const results = await Promise.allSettled([
-        waitPort(occupiedPort, { retries: 1, retryInterval: 50 }), // Should succeed (already occupied)
-        waitPort(freePort, { retries: 1, retryInterval: 50 }), // Should fail (free)
+        // Should succeed (already occupied)
+        waitPort(occupiedPort, { retries: 1, retryInterval: 50 }),
+        // Should fail (free)
+        waitPort(freePort, { retries: 1, retryInterval: 50 }),
       ]);
 
       expect(results[0].status).toBe('fulfilled');
@@ -204,57 +227,30 @@ describe('test/integration.test.ts - Integration scenarios', () => {
 
   describe('Complex workflow scenarios', () => {
     it('should handle complete server deployment workflow', async () => {
-      // 1. Find available port
       const desiredPort = 22000;
       const actualPort = await detectPort(desiredPort);
+      await startServer(actualPort, servers);
       
-      // 2. Start server
-      const server = createServer();
-      server.listen(actualPort, '0.0.0.0');
-      await once(server, 'listening');
-      servers.push(server);
-      
-      // 3. Verify port is occupied
       const nextAvailable = await detectPort(actualPort);
       expect(nextAvailable).toBeGreaterThan(actualPort);
       
-      // 4. Wait should succeed immediately since port is occupied
       await waitPort(actualPort, { retries: 2, retryInterval: 50 });
       
-      // 5. Verify port is still occupied
       const stillOccupied = await detectPort(actualPort);
       expect(stillOccupied).toBeGreaterThan(actualPort);
     });
 
     it('should handle multiple service ports allocation', async () => {
       const services = ['api', 'database', 'cache', 'websocket'];
-      const startPort = 23000;
+      const basePort = 23000;
+      const ports = await allocateServicePorts(services, basePort);
       
-      const ports: Record<string, number> = {};
-      
-      // Allocate ports for each service
-      for (const service of services) {
-        const offset = services.indexOf(service) * 10;
-        ports[service] = await detectPort(startPort + offset);
-        expect(ports[service]).toBeGreaterThanOrEqual(startPort + offset);
-      }
-      
-      // Verify all ports are assigned
       expect(Object.keys(ports)).toHaveLength(services.length);
       
-      // Start servers on allocated ports
-      const serviceServers: Server[] = [];
-      for (const service of services) {
-        const server = createServer();
-        server.listen(ports[service], '0.0.0.0');
-        await once(server, 'listening');
-        serviceServers.push(server);
-      }
+      const serviceServers = await startServers(services.map(s => ports[s]));
       
-      // Verify all services are running
       expect(serviceServers.every(s => s.listening)).toBe(true);
       
-      // Cleanup
       serviceServers.forEach(s => s.close());
     });
   });

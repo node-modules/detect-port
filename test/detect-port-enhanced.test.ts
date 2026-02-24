@@ -3,6 +3,21 @@ import { createServer, type Server } from 'node:net';
 import { once } from 'node:events';
 import { detectPort, IPAddressNotAvailableError } from '../src/index.js';
 
+async function occupyPortRange(startPort: number, endPort: number): Promise<Server[]> {
+  const occupied: Server[] = [];
+  for (let p = startPort; p <= endPort; p++) {
+    const server = createServer();
+    try {
+      server.listen(p, '0.0.0.0');
+      await once(server, 'listening');
+      occupied.push(server);
+    } catch {
+      // Port might be occupied, skip
+    }
+  }
+  return occupied;
+}
+
 describe('test/detect-port-enhanced.test.ts - Edge cases and error handling', () => {
   const servers: Server[] = [];
 
@@ -141,21 +156,8 @@ describe('test/detect-port-enhanced.test.ts - Edge cases and error handling', ()
     });
 
     it('should handle when all ports in range are occupied', async () => {
-      // Start with a high port so the range is small
       const startPort = 65530;
-      const servers: Server[] = [];
-      
-      // Occupy several ports
-      for (let p = startPort; p <= startPort + 5 && p <= 65535; p++) {
-        const server = createServer();
-        try {
-          server.listen(p, '0.0.0.0');
-          await once(server, 'listening');
-          servers.push(server);
-        } catch (err) {
-          // Port might be occupied, skip
-        }
-      }
+      const localServers = await occupyPortRange(startPort, startPort + 5);
 
       // Try to detect a port in this range
       const detectedPort = await detectPort(startPort);
@@ -165,7 +167,7 @@ describe('test/detect-port-enhanced.test.ts - Edge cases and error handling', ()
       expect(detectedPort).toBeLessThanOrEqual(65535);
 
       // Cleanup
-      servers.forEach(s => s.close());
+      localServers.forEach(s => s.close());
     });
   });
 
@@ -179,29 +181,15 @@ describe('test/detect-port-enhanced.test.ts - Edge cases and error handling', ()
     });
 
     it('should handle error on all hostname checks and increment port', async () => {
-      // Use multiple consecutive ports that are occupied
-      // This forces the code to try all hostname checks and increment port
       const startPort = 18000;
-      const servers: Server[] = [];
-      
-      // Occupy a range of ports to trigger multiple retry paths
-      for (let p = startPort; p < startPort + 3; p++) {
-        const server = createServer();
-        try {
-          server.listen(p, '0.0.0.0');
-          await once(server, 'listening');
-          servers.push(server);
-        } catch (err) {
-          // Port might be occupied, skip
-        }
-      }
+      const localServers = await occupyPortRange(startPort, startPort + 2);
 
       // Try to detect port in this range
       const detectedPort = await detectPort(startPort);
       expect(detectedPort).toBeGreaterThanOrEqual(startPort);
       
       // Cleanup
-      servers.forEach(s => s.close());
+      localServers.forEach(s => s.close());
     });
   });
 
@@ -252,7 +240,8 @@ describe('test/detect-port-enhanced.test.ts - Edge cases and error handling', ()
     it('should skip occupied port and find next available', async () => {
       const port = await detectPort(19999);
       expect(port).toBeGreaterThan(19999);
-      expect(port).toBeLessThanOrEqual(20009); // Within the search range
+      // Within the search range
+      expect(port).toBeLessThanOrEqual(20009);
     });
 
     it('should work with PortConfig object containing occupied port', async () => {
@@ -261,7 +250,8 @@ describe('test/detect-port-enhanced.test.ts - Edge cases and error handling', ()
     });
   });
 
-  describe('String to number conversion', () => {
+  describe('Input parsing', () => {
+    describe('String to number conversion', () => {
     it('should handle empty string port', async () => {
       const port = await detectPort('');
       expect(port).toBeGreaterThanOrEqual(0);
@@ -306,5 +296,6 @@ describe('test/detect-port-enhanced.test.ts - Edge cases and error handling', ()
         });
       });
     });
+  });
   });
 });

@@ -3,6 +3,14 @@ import { createServer, type Server } from 'node:net';
 import { once } from 'node:events';
 import { waitPort, detectPort, WaitPortRetryError } from '../src/index.js';
 
+async function startAndRegister(port: number, registry: Server[]): Promise<Server> {
+  const server = createServer();
+  server.listen(port, '0.0.0.0');
+  await once(server, 'listening');
+  registry.push(server);
+  return server;
+}
+
 describe('test/wait-port-enhanced.test.ts - Enhanced wait-port coverage', () => {
   const servers: Server[] = [];
 
@@ -23,7 +31,8 @@ describe('test/wait-port-enhanced.test.ts - Enhanced wait-port coverage', () => 
         expect(err).toBeInstanceOf(WaitPortRetryError);
         expect(err.message).toBe('retries exceeded');
         expect(err.retries).toBe(2);
-        expect(err.count).toBe(3); // count starts at 1, so after 2 retries, count is 3
+        // Count starts at 1, so after 2 retries, count is 3
+        expect(err.count).toBe(3);
         expect(err.name).toBe('WaitPortRetryError');
       }
     });
@@ -38,7 +47,8 @@ describe('test/wait-port-enhanced.test.ts - Enhanced wait-port coverage', () => 
       } catch (err: any) {
         const elapsed = Date.now() - startTime;
         // Should take at least 200ms (2 retries * 100ms interval)
-        expect(elapsed).toBeGreaterThanOrEqual(180); // Allow some margin
+        // Allow some margin
+        expect(elapsed).toBeGreaterThanOrEqual(180);
         expect(err).toBeInstanceOf(WaitPortRetryError);
       }
     });
@@ -48,7 +58,8 @@ describe('test/wait-port-enhanced.test.ts - Enhanced wait-port coverage', () => 
       // Don't occupy port so it times out
 
       try {
-        await waitPort(port, { retries: 1 }); // Only retryInterval not specified
+        // Only retryInterval not specified
+        await waitPort(port, { retries: 1 });
         expect.fail('Should have thrown WaitPortRetryError');
       } catch (err: any) {
         expect(err).toBeInstanceOf(WaitPortRetryError);
@@ -80,7 +91,7 @@ describe('test/wait-port-enhanced.test.ts - Enhanced wait-port coverage', () => 
       server.listen(port, '0.0.0.0');
       await once(server, 'listening');
 
-      // waitPort should detect that port is occupied and return immediately
+      // WaitPort should detect that port is occupied and return immediately
       const result = await waitPort(port, { retries: 5, retryInterval: 100 });
       expect(result).toBe(true);
       
@@ -186,22 +197,14 @@ describe('test/wait-port-enhanced.test.ts - Enhanced wait-port coverage', () => 
   describe('Multiple sequential waits', () => {
     it('should handle sequential waitPort calls on occupied ports', async () => {
       const port1 = await detectPort();
-      const server1 = createServer();
-      server1.listen(port1, '0.0.0.0');
-      await once(server1, 'listening');
-      servers.push(server1);
+      await startAndRegister(port1, servers);
 
-      // Wait for first port (already occupied, should return immediately)
       const result1 = await waitPort(port1, { retries: 2, retryInterval: 50 });
       expect(result1).toBe(true);
 
       const port2 = await detectPort(port1 + 10);
-      const server2 = createServer();
-      server2.listen(port2, '0.0.0.0');
-      await once(server2, 'listening');
-      servers.push(server2);
+      await startAndRegister(port2, servers);
 
-      // Wait for second port (already occupied, should return immediately)
       const result2 = await waitPort(port2, { retries: 2, retryInterval: 50 });
       expect(result2).toBe(true);
     });

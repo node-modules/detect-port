@@ -31,10 +31,10 @@ describe('test/cli.test.ts', async () => {
     assert(res.stdout.includes(pkg.description));
   });
 
-  // it('should output available port randomly', { only: true }, async () => {
-  //   const res = await execaNode(binFile);
-  //   const port = parseInt(stripAnsi(res.stdout).trim(), 10);
-  //   assert(port >= 9000 && port < 65535);
+  // It('should output available port randomly', { only: true }, async () => {
+  //   Const res = await execaNode(binFile);
+  //   Const port = parseInt(stripAnsi(res.stdout).trim(), 10);
+  //   Assert(port >= 9000 && port < 65535);
   // });
 
   it('should output available port from the given port', async () => {

@@ -5,6 +5,27 @@ import { once } from 'node:events';
 // Import modules
 let detectPort: any;
 
+async function occupyPorts(startPort: number, count: number): Promise<any[]> {
+  const occupied: any[] = [];
+  for (let i = 0; i < count; i++) {
+    const server = createServer();
+    server.listen(startPort + i, '0.0.0.0');
+    await once(server, 'listening');
+    occupied.push(server);
+  }
+  return occupied;
+}
+
+function closeAllServers(list: any[]) {
+  list.forEach(s => {
+    try {
+      s.close();
+    } catch {
+      // Ignore close errors
+    }
+  });
+}
+
 describe('test/detect-port-advanced.test.ts - Advanced edge cases for 100% coverage', () => {
   beforeAll(async () => {
     // Import modules
@@ -14,28 +35,15 @@ describe('test/detect-port-advanced.test.ts - Advanced edge cases for 100% cover
 
   describe('Cover remaining uncovered lines', () => {
     it('should handle multiple consecutive occupied ports and find available one', async () => {
-      // Occupy several consecutive ports to force code through multiple checks
       const startPort = 31000;
-      const servers: any[] = [];
+      const occupied = await occupyPorts(startPort, 3);
 
       try {
-        // Occupy 3 consecutive ports
-        for (let i = 0; i < 3; i++) {
-          const server = createServer();
-          server.listen(startPort + i, '0.0.0.0');
-          await once(server, 'listening');
-          servers.push(server);
-        }
-
-        // Should find a port after the occupied ones
         const detectedPort = await detectPort(startPort);
         expect(detectedPort).toBeGreaterThanOrEqual(startPort);
         expect(detectedPort).toBeLessThanOrEqual(startPort + 10);
       } finally {
-        // Cleanup
-        servers.forEach(s => {
-          try { s.close(); } catch (e) { /* ignore */ }
-        });
+        closeAllServers(occupied);
       }
     });
 
@@ -80,23 +88,14 @@ describe('test/detect-port-advanced.test.ts - Advanced edge cases for 100% cover
 
     it('should handle occupied ports on different interfaces', async () => {
       const port = 34000;
-      const servers: any[] = [];
+      const occupied = await occupyPorts(port, 1);
 
       try {
-        // Bind on 0.0.0.0
-        const s1 = createServer();
-        s1.listen(port, '0.0.0.0');
-        await once(s1, 'listening');
-        servers.push(s1);
-
-        // Try to detect - should skip occupied port
         const detectedPort = await detectPort(port);
         expect(detectedPort).toBeGreaterThan(port);
         expect(detectedPort).toBeLessThanOrEqual(port + 10);
       } finally {
-        servers.forEach(s => {
-          try { s.close(); } catch (e) { /* ignore */ }
-        });
+        closeAllServers(occupied);
       }
     });
   });

@@ -121,7 +121,8 @@ describe('test/cli-enhanced.test.ts - Enhanced CLI coverage', () => {
     it('should output verbose logs with port and --verbose flag', async () => {
       const res = await execaNode(binFile, ['13000', '--verbose']);
       expect(res.stdout).toContain('get available port');
-      expect(res.stdout).toMatch(/\d+/); // Should contain port number
+      // Should contain port number
+      expect(res.stdout).toMatch(/\d+/);
     });
 
     it('should show when port is occupied in verbose mode', async () => {
