@@ -18,7 +18,6 @@ export class WaitPortRetryError extends Error {
     this.name = this.constructor.name;
     this.retries = retries;
     this.count = count;
-    Error.captureStackTrace(this, this.constructor);
   }
 }
 

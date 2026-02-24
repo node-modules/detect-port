@@ -16,7 +16,6 @@ export class IPAddressNotAvailableError extends Error {
   constructor(options?: ErrorOptions) {
     super('The IP address is not available on this machine', options);
     this.name = this.constructor.name;
-    Error.captureStackTrace(this, this.constructor);
   }
 }
 

@@ -39,7 +39,7 @@ describe('test/cli.test.ts', async () => {
 
   it('should output available port from the given port', async () => {
     const givenPort = 9000;
-    const res = await execaNode(binFile, [ givenPort + '' ]);
+    const res = await execaNode(binFile, [ `${givenPort}` ]);
     const port = parseInt(stripAnsi(res.stdout).trim(), 10);
     assert(port >= givenPort && port < 65535);
   });

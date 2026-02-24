@@ -126,7 +126,7 @@ describe('test/integration.test.ts - Integration scenarios', () => {
 
     it('should handle server lifecycle with detectPort', async () => {
       // Simulate server startup
-      let port = await detectPort(20000);
+      const port = await detectPort(20000);
       const server = createServer();
       server.listen(port, '0.0.0.0');
       await once(server, 'listening');
@@ -206,7 +206,7 @@ describe('test/integration.test.ts - Integration scenarios', () => {
     it('should handle complete server deployment workflow', async () => {
       // 1. Find available port
       const desiredPort = 22000;
-      let actualPort = await detectPort(desiredPort);
+      const actualPort = await detectPort(desiredPort);
       
       // 2. Start server
       const server = createServer();
