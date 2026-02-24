@@ -19,104 +19,6 @@ export class IPAddressNotAvailableError extends Error {
   }
 }
 
-export function detectPort(port?: number | PortConfig | string): Promise<number>;
-export function detectPort(callback: DetectPortCallback): void;
-export function detectPort(port: number | PortConfig | string | undefined, callback: DetectPortCallback): void;
-export function detectPort(port?: number | string | PortConfig | DetectPortCallback, callback?: DetectPortCallback) {
-  let hostname: string | undefined = '';
-
-  if (port && typeof port === 'object') {
-    hostname = port.hostname;
-    callback = port.callback;
-    port = port.port;
-  } else {
-    if (typeof port === 'function') {
-      callback = port;
-      port = void 0;
-    }
-  }
-
-  port = parseInt(port as unknown as string) || 0;
-  let maxPort = port + 10;
-  if (maxPort > 65535) {
-    maxPort = 65535;
-  }
-  debug('detect free port between [%s, %s)', port, maxPort);
-  if (typeof callback === 'function') {
-    return tryListen(port, maxPort, hostname)
-      .then(port => callback(null, port))
-      .catch(callback);
-  }
-  // promise
-  return tryListen(port as number, maxPort, hostname);
-}
-
-async function handleError(port: number, maxPort: number, hostname?: string) {
-  if (port >= maxPort) {
-    debug('port: %s >= maxPort: %s, give up and use random port', port, maxPort);
-    port = 0;
-    maxPort = 0;
-  }
-  return await tryListen(port, maxPort, hostname);
-}
-
-async function tryListen(port: number, maxPort: number, hostname?: string): Promise<number> {
-  // use user hostname
-  if (hostname) {
-    try {
-      return await listen(port, hostname);
-    } catch (err: any) {
-      if (err.code === 'EADDRNOTAVAIL') {
-        throw new IPAddressNotAvailableError({ cause: err });
-      }
-      return await handleError(++port, maxPort, hostname);
-    }
-  }
-
-  // 1. check null / undefined
-  try {
-    await listen(port);
-  } catch (err) {
-    // ignore random listening
-    if (port === 0) {
-      throw err;
-    }
-    return await handleError(++port, maxPort, hostname);
-  }
-
-  // 2. check 0.0.0.0
-  try {
-    await listen(port, '0.0.0.0');
-  } catch (err) {
-    return await handleError(++port, maxPort, hostname);
-  }
-
-  // 3. check 127.0.0.1
-  try {
-    await listen(port, '127.0.0.1');
-  } catch (err) {
-    return await handleError(++port, maxPort, hostname);
-  }
-
-  // 4. check localhost
-  try {
-    await listen(port, 'localhost');
-  } catch (err: any) {
-    // if localhost refer to the ip that is not unknown on the machine, you will see the error EADDRNOTAVAIL
-    // https://stackoverflow.com/questions/10809740/listen-eaddrnotavail-error-in-node-js
-    if (err.code !== 'EADDRNOTAVAIL') {
-      return await handleError(++port, maxPort, hostname);
-    }
-  }
-
-  // 5. check current ip
-  try {
-    return await listen(port, ip());
-  } catch (err) {
-    return await handleError(++port, maxPort, hostname);
-  }
-}
-
 function listen(port: number, hostname?: string) {
   const server = createServer();
 
@@ -135,10 +37,112 @@ function listen(port: number, hostname?: string) {
 
     debug('try listen %d on %s', port, hostname);
     server.listen(port, hostname, () => {
-      port = (server.address() as AddressInfo).port;
-      debug('get free %s:%s', hostname, port);
+      const assignedPort = (server.address() as AddressInfo).port;
+      debug('get free %s:%s', hostname, assignedPort);
       server.close();
-      return resolve(port);
+      return resolve(assignedPort);
     });
   });
+}
+
+async function handleError(port: number, maxPort: number, hostname?: string) {
+  let nextPort = port;
+  let nextMaxPort = maxPort;
+  if (nextPort >= nextMaxPort) {
+    debug('port: %s >= maxPort: %s, give up and use random port', nextPort, nextMaxPort);
+    nextPort = 0;
+    nextMaxPort = 0;
+  }
+  return await tryListen(nextPort, nextMaxPort, hostname);
+}
+
+async function tryListen(port: number, maxPort: number, hostname?: string): Promise<number> {
+  // Use user hostname
+  if (hostname) {
+    try {
+      return await listen(port, hostname);
+    } catch (err: any) {
+      if (err.code === 'EADDRNOTAVAIL') {
+        throw new IPAddressNotAvailableError({ cause: err });
+      }
+      return await handleError(port + 1, maxPort, hostname);
+    }
+  }
+
+  // 1. check null / undefined
+  try {
+    await listen(port);
+  } catch (err) {
+    // Ignore random listening
+    if (port === 0) {
+      throw err;
+    }
+    return await handleError(port + 1, maxPort, hostname);
+  }
+
+  // 2. check 0.0.0.0
+  try {
+    await listen(port, '0.0.0.0');
+  } catch (err) {
+    return await handleError(port + 1, maxPort, hostname);
+  }
+
+  // 3. check 127.0.0.1
+  try {
+    await listen(port, '127.0.0.1');
+  } catch (err) {
+    return await handleError(port + 1, maxPort, hostname);
+  }
+
+  // 4. check localhost
+  try {
+    await listen(port, 'localhost');
+  } catch (err: any) {
+    // If localhost refer to the ip that is not unknown on the machine, you will see the error EADDRNOTAVAIL
+    // https://stackoverflow.com/questions/10809740/listen-eaddrnotavail-error-in-node-js
+    if (err.code !== 'EADDRNOTAVAIL') {
+      return await handleError(port + 1, maxPort, hostname);
+    }
+  }
+
+  // 5. check current ip
+  try {
+    return await listen(port, ip());
+  } catch (err) {
+    return await handleError(port + 1, maxPort, hostname);
+  }
+}
+
+export function detectPort(port?: number | PortConfig | string): Promise<number>;
+export function detectPort(callback: DetectPortCallback): void;
+export function detectPort(port: number | PortConfig | string | undefined, callback: DetectPortCallback): void;
+export function detectPort(port?: number | string | PortConfig | DetectPortCallback, callback?: DetectPortCallback) {
+  let hostname: string | undefined = '';
+  let portValue: number | string | undefined;
+  let cb = callback;
+
+  if (port && typeof port === 'object') {
+    hostname = port.hostname;
+    cb = port.callback;
+    portValue = port.port;
+  } else if (typeof port === 'function') {
+    cb = port;
+    portValue = void 0;
+  } else {
+    portValue = port;
+  }
+
+  const parsedPort = parseInt(portValue as unknown as string) || 0;
+  let maxPort = parsedPort + 10;
+  if (maxPort > 65535) {
+    maxPort = 65535;
+  }
+  debug('detect free port between [%s, %s)', parsedPort, maxPort);
+  if (typeof cb === 'function') {
+    return tryListen(parsedPort, maxPort, hostname)
+      .then(detectedPort => cb(null, detectedPort))
+      .catch(cb);
+  }
+  // Promise
+  return tryListen(parsedPort, maxPort, hostname);
 }
