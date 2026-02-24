@@ -23,7 +23,11 @@
     "no-unused-vars": "allow",
     "no-void": "allow",
     "import/no-named-as-default": "allow",
-    "typescript/no-explicit-any": "allow"
+    "typescript/no-explicit-any": "allow",
+    "import/no-nodejs-modules": "allow",
+    "import/no-named-export": "allow",
+    "import/no-relative-parent-imports": "allow",
+    "unicorn/prefer-module": "allow"
   },
   "ignorePatterns": [
     "test/fixtures",
