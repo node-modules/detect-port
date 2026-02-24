@@ -23,20 +23,7 @@
     "no-unused-vars": "allow",
     "no-void": "allow",
     "import/no-named-as-default": "allow",
-    "typescript/no-explicit-any": "allow",
-    "import/no-nodejs-modules": "allow",
-    "import/no-relative-parent-imports": "allow",
-    "max-statements": "allow",
-    "capitalized-comments": "allow",
-    "no-param-reassign": "allow",
-    "import/no-named-export": "allow",
-    "no-inline-comments": "allow",
-    "no-use-before-define": "allow",
-    "no-shadow": "allow",
-    "promise/always-return": "allow",
-    "import/no-namespace": "allow",
-    "no-non-null-assertion": "allow",
-    "unicorn/prefer-module": "allow"
+    "typescript/no-explicit-any": "allow"
   },
   "ignorePatterns": [
     "test/fixtures",
